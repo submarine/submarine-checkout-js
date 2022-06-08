@@ -1,0 +1,38 @@
+{
+  "name": "submarine-checkout-js",
+  "version": "0.0.1",
+  "description": "Javascript library for Submarine customisations in the Shopify checkout.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/submarine/submarine-checkout-js.git"
+  },
+  "keywords": [
+    "submarine",
+    "shopify"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "prepublishOnly": "vite build",
+    "serve": "vite preview"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/submarine-checkout.umd.js",
+  "module": "./dist/submarine-checkout.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/submarine-checkout.es.js",
+      "require": "./dist/submarine-checkout.umd.js"
+    }
+  },
+  "dependencies": {
+    "preact": "^10.7.3",
+    "submarine-js": "^0.4.0-beta.2"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.2.0",
+    "vite": "^2.9.9"
+  }
+}
