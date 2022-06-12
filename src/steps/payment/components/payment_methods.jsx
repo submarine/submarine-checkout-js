@@ -1,7 +1,7 @@
-import { RadioWrapper } from "./radio-wrapper";
+import { RadioWrapper } from "./radio_wrapper";
 import { SubmarineConfig, SubmarineContext } from "./contexts";
 
-export const App = ({ submarineConfig, submarineContext }) => {
+export const PaymentMethods = ({ submarine, submarineConfig, submarineContext, paymentMethods }) => {
   return (
     <SubmarineConfig.Provider value={submarineConfig}>
       <SubmarineContext.Provider value={submarineContext}>

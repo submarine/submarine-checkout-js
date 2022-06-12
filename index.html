@@ -50,7 +50,7 @@
     Shopify.locale = "en";
     Shopify.currency = {"active":"USD","rate":"1.0"};
     Shopify.country = "US";
-    Shopify.theme = {"name":"Disco - Submarine.js","id":129317929210,"theme_store_id":null,"role":"unpublished"};
+    Shopify.theme = {"name":"Disco - SubmarineCheckout.js","id":129317929210,"theme_store_id":null,"role":"unpublished"};
     Shopify.theme.handle = "null";
     Shopify.theme.style = {"id":null,"handle":null};
   </script>
@@ -58,12 +58,29 @@
   <script src="//cdn.shopify.com/shopifycloud/shopify/assets/checkout_2021-01-25-ca21603163e62fa14dd464c0e20ab2187dc1df0ff6724098a90ebb02d1332c7f.js" crossorigin="anonymous"></script>
   <script src="https://checkout.shopifycs.com/dist/card_fields.js"></script>
 
-  <script type="module" src="/src/checkout.jsx"></script>
+  <script type="module" src="/src/main.js"></script>
   <script id="submarine-config" type="application/json">
     {
-      "apiUrl": "https://submarine-development.discolabs.com/api/v1",
+      "authentication": {
+        "customer_id": 123,
+        "shop": "submarine.myshopify.com",
+        "signature": "123",
+        "timestamp": 123
+      },
+      "paymentMethods": [
+        {
+          "payment_processor": "stripe",
+          "payment_method_type": "credit-card"
+        },
+        {
+          "payment_processor": "braintree",
+          "payment_method_type": "paypal"
+        }
+      ],
       "environment": "development",
-      "submarineGatewayId": "76733874426"
+      "gateway": {
+        "id": "76733874426"
+      }
     }
   </script>
   <script id="submarine-context" type="application/json">

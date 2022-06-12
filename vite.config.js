@@ -6,10 +6,10 @@ import preact from '@preact/preset-vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/checkout.jsx'),
+      entry: path.resolve(__dirname, 'src/steps.jsx'),
       formats: ['es', 'iife', 'umd'],
       name: 'SubmarineCheckout',
-      fileName: (format) => format === 'iife' ? 'submarine-checkout.js' : `submarine-checkout.${format}.js`
+      fileName: (format) => format === 'iife' ? 'submarine-steps.js' : `submarine-checkout.${format}.js`
     }
   },
   plugins: [
