@@ -10,6 +10,26 @@ export default class PaymentMethod {
     return true;
   }
 
+  // return the payment method id
+  id() {
+    return this.paymentMethod.id;
+  }
+
+  // return the processor
+  processor() {
+    return this.paymentMethod.payment_processor;
+  }
+
+  // return the payment method type
+  type() {
+    return this.paymentMethod.payment_method_type;
+  }
+
+  // return the icons to display for this payment method type
+  icons() {
+    return [];
+  }
+
   // return an array of external JS dependencies required for this payment method
   scripts() {
     return [];

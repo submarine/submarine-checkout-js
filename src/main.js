@@ -1,4 +1,5 @@
 import { SubmarineCheckout } from "./submarine_checkout";
+import { DEFAULT_TRANSLATIONS } from "./constants";
 
 // main.js
 // entry point for Submarine's steps customisations
@@ -9,6 +10,21 @@ const parseJSONScript = (document, id) => {
   try {
     return JSON.parse(script.innerHTML);
   } catch { return null; }
+};
+
+// deep merge a simple options objects
+const mergeOptions = (defaults, options) => {
+  Object.keys(options).forEach(key => {
+    if(options[key] instanceof Object) {
+      defaults[key] = mergeOptions(defaults[key], options[key]);
+    }
+  });
+
+  return Object.assign(
+    {},
+    defaults,
+    options
+  );
 };
 
 // initialise SubmarineCheckout
@@ -25,6 +41,9 @@ const initialise = () => {
 
     // bail if Shopify object not present or config or context parsing failed
     if(!Shopify || !Shopify.Checkout || !submarineConfig || !submarineContext) { return; }
+
+    // merge default translations with any provided in the context
+    submarineContext.translations = mergeOptions(DEFAULT_TRANSLATIONS, submarineContext.translations || {});
 
     // initialise a SubmarineCheckout object and make it accessible to the window
     window.submarineCheckout = new SubmarineCheckout({ document, submarineConfig, submarineContext, Shopify });

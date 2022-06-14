@@ -586,11 +586,6 @@ kolorist@^1.2.10:
   resolved "https://registry.yarnpkg.com/kolorist/-/kolorist-1.5.1.tgz#c3d66dc4fabde4f6b7faa6efda84c00491f9e52b"
   integrity sha512-lxpCM3HTvquGxKGzHeknB/sUjuVoUElLlfYnXZT73K8geR9jQbroGlSCFBax9/0mpGoD3kzcMLnOlGQPJJNyqQ==
 
-load-scripts@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/load-scripts/-/load-scripts-2.0.0.tgz#9e703cda28abf3096fd39e0f92a36facaf459f53"
-  integrity sha512-UHFTisSP4k7n7wGgqcWJzSKr8VfqvAdT4gW7xJmyaQjuhyg7ISubdkpF/8Q2AaamxIhUjWVW7O9+KdOm7iN3yg==
-
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"

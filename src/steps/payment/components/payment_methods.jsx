@@ -1,14 +1,21 @@
-import { RadioWrapper } from "./radio_wrapper";
-import { SubmarineConfig, SubmarineContext } from "./contexts";
+import { useState } from "preact/compat";
+import { PaymentMethod } from "./payment_method";
 
-export const PaymentMethods = ({ submarine, submarineConfig, submarineContext, paymentMethods }) => {
+export const PaymentMethods = ({ paymentMethods }) => {
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(paymentMethods[0]);
+  const canSelectPaymentMethod = paymentMethods.length > 1;
+
   return (
-    <SubmarineConfig.Provider value={submarineConfig}>
-      <SubmarineContext.Provider value={submarineContext}>
-        <div class="content-box">
-          <RadioWrapper gatewayId={submarineConfig.submarineGatewayId} />
-        </div>
-      </SubmarineContext.Provider>
-    </SubmarineConfig.Provider>
-  )
+    <div className="content-box">
+      {paymentMethods.map(paymentMethod => {
+        return (
+          <PaymentMethod
+            paymentMethod={paymentMethod}
+            selectedPaymentMethod={selectedPaymentMethod}
+            canSelectPaymentMethod={canSelectPaymentMethod}
+          />
+        );
+      })}
+    </div>
+  );
 };

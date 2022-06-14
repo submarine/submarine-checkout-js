@@ -1,6 +1,6 @@
 import Step from "../step";
 import { render } from "preact";
-import { PaymentMethods } from "./components/payment_methods";
+import { PaymentMethodsContainer } from "./components/payment_methods_container";
 
 export default class PaymentStep extends Step {
 
@@ -23,12 +23,12 @@ export default class PaymentStep extends Step {
     }
 
     // find the submarine subform
-    const paymentSubformElement = document.querySelector('[data-payment_methods-subform="required"]');
+    const paymentSubformElement = document.querySelector('[data-payment-subform="required"]');
     const paymentSubformContentElement = paymentSubformElement.querySelector('.content-box');
 
-    // render the Submarine payment methods component on the submarine gateway element
+    // render the Submarine payment methods container component on the submarine gateway element
     render(
-      <PaymentMethods
+      <PaymentMethodsContainer
         submarine={submarine}
         submarineConfig={submarineConfig}
         submarineContext={submarineContext}
