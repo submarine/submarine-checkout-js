@@ -12,6 +12,7 @@ export const PaymentMethods = ({ paymentMethods }) => {
           <PaymentMethod
             paymentMethod={paymentMethod}
             selectedPaymentMethod={selectedPaymentMethod}
+            setSelectedPaymentMethod={setSelectedPaymentMethod}
             canSelectPaymentMethod={canSelectPaymentMethod}
           />
         );

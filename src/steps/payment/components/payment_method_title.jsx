@@ -3,23 +3,24 @@ import { SubmarineConfig, SubmarineContext } from "./contexts";
 import { PaymentMethodTitleInput } from "./payment_method_title_input";
 import { PaymentMethodTitleIcon } from "./payment_method_title_icon";
 
-export const PaymentMethodTitle = ({ paymentMethod, selectedPaymentMethod, canSelectPaymentMethod }) => {
+export const PaymentMethodTitle = ({ paymentMethod, selectedPaymentMethod, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
   const submarineConfig = useContext(SubmarineConfig);
   const submarineContext = useContext(SubmarineContext);
-  const isCurrentlySelectedPaymentMethod = paymentMethod.id === selectedPaymentMethod.id;
+  const isCurrentlySelectedPaymentMethod = (selectedPaymentMethod !== null) && (paymentMethod.id() === selectedPaymentMethod.id());
 
   return (
     <div className="radio-wrapper content-box__row" data-gateway-group="offsite" data-gateway-name="offsite" data-select-gateway={submarineConfig.gateway.id}>
       <PaymentMethodTitleInput
         paymentMethod={paymentMethod}
         isCurrentlySelectedPaymentMethod={isCurrentlySelectedPaymentMethod}
+        setSelectedPaymentMethod={setSelectedPaymentMethod}
         canSelectPaymentMethod={canSelectPaymentMethod}
       />
 
       <div className={`radio__label ${canSelectPaymentMethod ? 'content-box__emphasis' : 'radio__label--inactive'}`}>
-        <h3 className="radio__label__primary content-box__emphasis">
+        <label className="radio__label__primary content-box__emphasis" htmlFor={`checkout_payment_method_shop_${paymentMethod.id()}`}>
           {submarineContext.translations.payment_methods[paymentMethod.processor()][paymentMethod.type()].title}
-        </h3>
+        </label>
         <div className="radio__label__accessory">
           <h3 className="visually-hidden">
             {` ${submarineContext.translations.payment_methods.common.pay_with} `}
