@@ -14,17 +14,17 @@ const parseJSONScript = (document, id) => {
 
 // deep merge a simple options objects
 const mergeOptions = (defaults, options) => {
+  const result = Object.assign({}, defaults);
+
   Object.keys(options).forEach(key => {
     if(options[key] instanceof Object) {
-      defaults[key] = mergeOptions(defaults[key], options[key]);
+      result[key] = mergeOptions(defaults[key], options[key]);
+    } else {
+      result[key] = options[key];
     }
   });
 
-  return Object.assign(
-    {},
-    defaults,
-    options
-  );
+  return result;
 };
 
 // initialise SubmarineCheckout
