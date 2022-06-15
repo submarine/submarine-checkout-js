@@ -1,12 +1,18 @@
 import { useContext } from "preact/compat";
+import classNames from "classnames";
 import { SubmarineConfig, SubmarineContext } from "./contexts";
 import { PaymentMethodTitleInput } from "./payment_method_title_input";
 import { PaymentMethodTitleIcon } from "./payment_method_title_icon";
 
-export const PaymentMethodTitle = ({ paymentMethod, selectedPaymentMethod, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
+export const PaymentMethodTitle = ({ paymentMethod, isCurrentlySelectedPaymentMethod, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
   const submarineConfig = useContext(SubmarineConfig);
   const submarineContext = useContext(SubmarineContext);
-  const isCurrentlySelectedPaymentMethod = (selectedPaymentMethod !== null) && (paymentMethod.id() === selectedPaymentMethod.id());
+
+  const labelClassName = classNames({
+    "radio__label": true,
+    "content-box__emphasis": canSelectPaymentMethod,
+    "radio__label--inactive": !canSelectPaymentMethod
+  });
 
   return (
     <div className="radio-wrapper content-box__row" data-gateway-group="offsite" data-gateway-name="offsite" data-select-gateway={submarineConfig.gateway.id}>
@@ -17,7 +23,7 @@ export const PaymentMethodTitle = ({ paymentMethod, selectedPaymentMethod, setSe
         canSelectPaymentMethod={canSelectPaymentMethod}
       />
 
-      <div className={`radio__label ${canSelectPaymentMethod ? 'content-box__emphasis' : 'radio__label--inactive'}`}>
+      <div className={labelClassName}>
         <label className="radio__label__primary content-box__emphasis" htmlFor={`checkout_payment_method_shop_${paymentMethod.id()}`}>
           {submarineContext.translations.payment_methods[paymentMethod.processor()][paymentMethod.type()].title}
         </label>

@@ -1,7 +1,7 @@
-import Payment_method from "../payment_method";
+import PaymentMethod from "../payment_method";
 import { ICON_PAYPAL } from "../../constants";
 
-export default class BraintreePayPal extends Payment_method {
+export default class BraintreePayPal extends PaymentMethod {
 
   icons() {
     return [
