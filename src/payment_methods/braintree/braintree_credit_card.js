@@ -1,5 +1,5 @@
 import PaymentMethod from "../payment_method";
-import {ICON_AMEX, ICON_MASTERCARD, ICON_VISA} from "../../constants";
+import { ICON_AMEX, ICON_MASTERCARD, ICON_VISA } from "../../constants";
 
 export default class BraintreeCreditCard extends PaymentMethod {
 
