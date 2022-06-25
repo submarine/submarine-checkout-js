@@ -11,12 +11,16 @@ export const DEFAULT_TRANSLATIONS = {
     },
     "stripe": {
       "credit-card": {
-        "title": "Credit / Debit Cards"
+        "title": "Credit Card"
       }
     },
     "braintree": {
       "credit-card": {
-        "title": "Credit Cards"
+        "title": "Credit Card",
+        "number": "Card number",
+        "name": "Card number",
+        "expiry": "Expiration date (MM \/ YY)",
+        "cvv": "Security code"
       },
       "paypal": {
         "title": "PayPal"

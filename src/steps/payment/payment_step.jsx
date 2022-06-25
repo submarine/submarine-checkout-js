@@ -37,6 +37,9 @@ export default class PaymentStep extends Step {
       paymentSubformElement,
       paymentSubformContentElement
     );
+
+    // set up each payment method
+    paymentMethods.forEach(paymentMethod => paymentMethod.setup({ submarine, submarineContext }));
   }
 
 }

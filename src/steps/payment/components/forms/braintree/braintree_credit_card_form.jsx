@@ -1,17 +1,48 @@
+import CreditCardNumberTooltip from "../common/credit_card_number_tooltip";
+import CreditCardVerificationValueTooltip from "../common/credit_card_verification_value_tooltip";
+import { useContext } from "preact/compat";
+import { SubmarineContext } from "../../contexts";
+
 const BraintreeCreditCardForm = () => {
+  const submarineContext = useContext(SubmarineContext);
+
   return (
-    <div className="braintree-credit-card-wrapper">
-      <div id="braintree-credit-card-mount" className="braintree-credit-card-mount" />
-      <div id="braintree-credit-card-interstitial-loader" className="braintree-interstitial-upper-container">
-        <div className="braintree-interstitial-loader__container">
-          <div className="braintree-interstitial-loader__indicator">
-            <svg width="14" height="16" className="braintree-interstitial-loader__lock">
-              <svg id="iconLockLoader" viewBox="0 0 28 32">
-                <title>Lock Loader</title>
-                <path d="M6 10V8c0-4.422 3.582-8 8-8 4.41 0 8 3.582 8 8v2h-4V7.995C18 5.79 16.205 4 14 4c-2.21 0-4 1.792-4 3.995V10H6zM.997 14c-.55 0-.997.445-.997.993v16.014c0 .548.44.993.997.993h26.006c.55 0 .997-.445.997-.993V14.993c0-.548-.44-.993-.997-.993H.997z" />
-              </svg>
-            </svg>
-          </div>
+    <div className="fieldset">
+      <div className="field field--required">
+        <div className="field__input-wrapper field__input-wrapper--icon-right" data-google-places="false">
+          <label className="field__label field__label--visible" htmlFor="checkout_credit_card_number">
+            {submarineContext.translations.payment_methods.braintree["credit-card"].number}
+          </label>
+          <div id="braintree-credit-card-card-number" className="field__input" />
+          <CreditCardNumberTooltip />
+        </div>
+      </div>
+
+      <div className="field field--required">
+        <div className="field__input-wrapper">
+          <label className="field__label field__label--visible" htmlFor="checkout_credit_card_name">
+            {submarineContext.translations.payment_methods.braintree["credit-card"].name}
+          </label>
+          <input type="text" placeholder="Name on card" className="field__input"/>
+        </div>
+      </div>
+
+      <div className="field--half field field--required" data-credit-card-expiry="true" data-google-places="false">
+        <div className="field__input-wrapper" data-google-places="false">
+          <label className="field__label field__label--visible" htmlFor="checkout_credit_card_expiry">
+            {submarineContext.translations.payment_methods.braintree["credit-card"].expiry}
+          </label>
+          <div id="braintree-credit-card-expiration-date" className="field__input" />
+        </div>
+      </div>
+
+      <div className="field--half field field--required">
+        <div className="field__input-wrapper field__input-wrapper--icon-right">
+          <label className="field__label field__label--visible" htmlFor="checkout_credit_card_verification_value">
+            {submarineContext.translations.payment_methods.braintree["credit-card"].cvv}
+          </label>
+          <div id="braintree-credit-card-cvv" className="field__input" />
+          <CreditCardVerificationValueTooltip />
         </div>
       </div>
     </div>

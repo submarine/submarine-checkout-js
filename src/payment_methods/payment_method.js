@@ -35,4 +35,7 @@ export default class PaymentMethod {
     return [];
   }
 
+  // set up this payment method
+  setup({ submarine, submarineContext }) {}
+
 }
