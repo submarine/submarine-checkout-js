@@ -1,7 +1,7 @@
 import { useState } from "preact/compat";
 import { Upsell } from "./upsell";
 
-export const Upsells = ({ upsells }) => {
+export const Upsells = ({ submarine, upsells }) => {
   const [open, setOpen] = useState(true);
 
   if(!open || (upsells.length === 0)) {
@@ -37,6 +37,7 @@ export const Upsells = ({ upsells }) => {
         {upsells.map(upsell => {
           return (
             <Upsell
+              submarine={submarine}
               upsell={upsell}
             />
           )

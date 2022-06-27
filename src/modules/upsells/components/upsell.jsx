@@ -1,8 +1,10 @@
 import { useState } from "preact/compat";
+import { UpsellButton } from "./upsell_button";
 
-export const Upsell = ({ upsell }) => {
+export const Upsell = ({ submarine, upsell }) => {
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   let variantSelector = null;
   if(upsell.variants.length > 1) {
@@ -21,14 +23,21 @@ export const Upsell = ({ upsell }) => {
       <div className="field field--required field--show-floating-label">
         <div className="field__input-wrapper">
           <label className="field__label field__label--visible">Quantity</label>
-          <input placeholder="Quantity" className="field__input field__in" aria-required="true" type="number" value="1" name="" />
+          <input
+            onChange={(e) => setQuantity(parseInt(e.target.value))}
+            placeholder="Quantity"
+            className="field__input field__in"
+            aria-required="true"
+            type="number"
+            value="1"
+            name=""
+          />
         </div>
       </div>
     </div>
   );
 
   const selectedVariant = upsell.variants[selectedVariantIndex];
-  const price = selectedVariant.price * quantity;
 
   return (
     <div className="submarine-upsells--upsell">
@@ -51,14 +60,11 @@ export const Upsell = ({ upsell }) => {
       <div className="submarine-upsells--action-wrapper">
         {variantSelector}
         {quantitySelector}
-        <button className="btn">
-          <span className="btn__content">
-            Pay now - ${price}
-          </span>
-          <svg className="icon-svg icon-svg--size-18 btn__spinner icon-svg--spinner-button" aria-hidden="true" focusable="false">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10c0 5.523-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0v2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8h2z"/></svg>
-          </svg>
-        </button>
+        <UpsellButton
+          submarine={submarine}
+          selectedVariant={selectedVariant}
+          quantity={quantity}
+        />
       </div>
     </div>
   );
