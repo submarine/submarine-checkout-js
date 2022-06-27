@@ -45,8 +45,8 @@ export default class PresentmentCurrency extends Module {
   }
 
   // initialise the presentment_currency module
-  initialise({ submarine, paymentMethods }) {
-    const { document, submarineConfig, submarineContext } = this.options;
+  initialise() {
+    const { document, submarineContext } = this.options;
 
     const shopCurrency = submarineContext.shop.currency;
     const shopAmount = submarineContext.order.totalPrice;

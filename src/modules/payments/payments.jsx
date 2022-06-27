@@ -2,7 +2,7 @@ import Module from "../module";
 import { render } from "preact";
 import { PaymentMethodsContainer } from "./components/payment_methods_container";
 
-export default class PaymentModule extends Module {
+export default class Payments extends Module {
 
   steps() {
     return [
@@ -10,7 +10,7 @@ export default class PaymentModule extends Module {
     ];
   }
 
-  // initialise the payment module
+  // initialise the payments module
   initialise({ submarine, paymentMethods }) {
     const { document, submarineConfig, submarineContext } = this.options;
 

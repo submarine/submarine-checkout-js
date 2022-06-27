@@ -1,8 +1,11 @@
 import { Submarine } from 'submarine-js';
-import { initialisePaymentMethod } from "./payment_methods/initialise";
-import PaymentModule from "./modules/payment/payment_module";
-import PresentmentCurrency from "./modules/presentment_currency/presentment_currency";
 import loadScripts from '@lemuria/load-scripts'
+
+import { initialisePaymentMethod } from "./payment_methods/initialise";
+
+import Payments from "./modules/payments/Payments";
+import PresentmentCurrency from "./modules/presentment_currency/presentment_currency";
+import Upsells from "./modules/upsells/upsells";
 
 export class SubmarineCheckout {
 
@@ -24,8 +27,9 @@ export class SubmarineCheckout {
 
   buildModules(options) {
     return [
-      new PaymentModule(options),
-      new PresentmentCurrency(options)
+      new Payments(options),
+      new PresentmentCurrency(options),
+      new Upsells(options)
     ];
   }
 
