@@ -65,6 +65,9 @@ export default class Upsells extends Module {
       // sort upsells by rank
       upsells.sort((a, b) => a.rank - b.rank);
 
+      // trim upsells to a maximum of 5 options
+      upsells.length = 5;
+
       // render available upsells
       this.renderUpsells(submarine, upsells);
     });
@@ -74,7 +77,7 @@ export default class Upsells extends Module {
     const { document, submarineConfig, submarineContext } = this.options;
 
     // find the body content element
-    const contentElement = document.querySelector('[data-content]');
+    const contentElement = document.querySelector("[data-content]");
     const firstContentElement = contentElement.firstChild;
 
     // create a container node to render into
