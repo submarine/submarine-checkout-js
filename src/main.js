@@ -2,7 +2,7 @@ import { SubmarineCheckout } from "./submarine_checkout";
 import { DEFAULT_TRANSLATIONS } from "./constants";
 
 // main.js
-// entry point for Submarine's steps customisations
+// entry point for Submarine's checkout customisations
 
 // parse a JSON configuration object from the DOM
 const parseJSONScript = (document, id) => {

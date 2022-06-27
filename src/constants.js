@@ -1,3 +1,6 @@
+export const ATTRIBUTE_PRESENTMENT_AMOUNT = '_presentment_amount';
+export const ATTRIBUTE_PRESENTMENT_CURRENCY = '_presentment_currency';
+
 export const DEFAULT_TRANSLATIONS = {
   "payment_methods": {
     "common": {

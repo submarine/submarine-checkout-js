@@ -1,7 +1,7 @@
 import { Submarine } from 'submarine-js';
 import { initialisePaymentMethod } from "./payment_methods/initialise";
-import PaymentStep from "./steps/payment/payment_step";
-import ThankyouStep from "./steps/thankyou/thankyou_step";
+import PaymentModule from "./modules/payment/payment_module";
+import PresentmentCurrency from "./modules/presentment_currency/presentment_currency";
 import loadScripts from '@lemuria/load-scripts'
 
 export class SubmarineCheckout {
@@ -11,7 +11,7 @@ export class SubmarineCheckout {
 
     this.submarine = new Submarine(submarineConfig);
     this.paymentMethods = this.buildPaymentMethods(submarineConfig, submarineContext);
-    this.steps = this.buildSteps(options);
+    this.modules = this.buildModules(options);
 
     this.preload();
   }
@@ -22,10 +22,10 @@ export class SubmarineCheckout {
       .filter(paymentMethod => paymentMethod.isAvailable(submarineContext));
   }
 
-  buildSteps(options) {
+  buildModules(options) {
     return [
-      new PaymentStep(options),
-      new ThankyouStep(options)
+      new PaymentModule(options),
+      new PresentmentCurrency(options)
     ];
   }
 
@@ -43,12 +43,12 @@ export class SubmarineCheckout {
   }
 
   initialise() {
-    this.steps.forEach(step => {
-      if(!step.isCurrent()) {
+    this.modules.forEach(module => {
+      if(!module.isActive()) {
         return;
       }
 
-      step.initialise({
+      module.initialise({
         submarine: this.submarine,
         paymentMethods: this.paymentMethods
       });
