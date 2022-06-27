@@ -30,7 +30,8 @@ export default class Upsells extends Module {
     const { submarineContext } = this.options;
 
     const productIds = submarineContext.order.productIds;
-    const recommendationRequests = productIds.map(productId => fetch(`/recommendations/products.json?product_id=${productId}&limit=10`).then(response => response.json()));
+    const customerLocale = submarineContext.customer.locale;
+    const recommendationRequests = productIds.map(productId => fetch(`/${customerLocale}/recommendations/products.json?product_id=${productId}&limit=10`).then(response => response.json()));
 
     Promise.all(recommendationRequests).then(recommendedProducts => {
       const recommendations = {};
