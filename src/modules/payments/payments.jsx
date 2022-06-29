@@ -3,7 +3,7 @@
 
 import Module from "../module";
 import { render } from "preact";
-import { PaymentMethodsContainer } from "./components/payment_methods_container";
+import { PaymentsContainer } from "./components/payments_container";
 
 export default class Payments extends Module {
 
@@ -31,7 +31,7 @@ export default class Payments extends Module {
 
     // render the Submarine payment methods container component on the submarine gateway element
     render(
-      <PaymentMethodsContainer
+      <PaymentsContainer
         submarine={submarine}
         submarineConfig={submarineConfig}
         submarineContext={submarineContext}
@@ -40,9 +40,6 @@ export default class Payments extends Module {
       paymentSubformElement,
       paymentSubformContentElement
     );
-
-    // set up each payment method
-    paymentMethods.forEach(paymentMethod => paymentMethod.setup({ submarine, submarineContext }));
   }
 
 }

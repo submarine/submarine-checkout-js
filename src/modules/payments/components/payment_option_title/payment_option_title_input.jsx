@@ -1,7 +1,7 @@
 import { useContext } from "preact/compat";
-import { SubmarineConfig } from "./contexts";
+import { SubmarineConfig } from "../contexts";
 
-export const PaymentMethodTitleInput = ({ paymentMethod, isCurrentlySelectedPaymentMethod, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
+export const PaymentOptionTitleInput = ({ paymentMethod, isCurrentlySelectedPaymentMethod, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
   const submarineConfig = useContext(SubmarineConfig);
 
   // if we can't select a payment method, simply return a hidden input

@@ -1,10 +1,10 @@
 import { useContext } from "preact/compat";
 import classNames from "classnames";
-import { SubmarineConfig, SubmarineContext } from "./contexts";
-import { PaymentMethodTitleInput } from "./payment_method_title_input";
-import { PaymentMethodTitleIcon } from "./payment_method_title_icon";
+import { SubmarineConfig, SubmarineContext } from "../contexts";
+import { PaymentOptionTitleInput } from "./payment_option_title_input";
+import { PaymentOptionTitleIcon } from "./payment_option_title_icon";
 
-export const PaymentMethodTitle = ({ paymentMethod, isCurrentlySelectedPaymentMethod, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
+export const PaymentOptionTitle = ({ paymentMethod, isCurrentlySelectedPaymentMethod, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
   const submarineConfig = useContext(SubmarineConfig);
   const submarineContext = useContext(SubmarineContext);
 
@@ -16,7 +16,7 @@ export const PaymentMethodTitle = ({ paymentMethod, isCurrentlySelectedPaymentMe
 
   return (
     <div className="radio-wrapper content-box__row" data-gateway-group="offsite" data-gateway-name="offsite" data-select-gateway={submarineConfig.gateway.id}>
-      <PaymentMethodTitleInput
+      <PaymentOptionTitleInput
         paymentMethod={paymentMethod}
         isCurrentlySelectedPaymentMethod={isCurrentlySelectedPaymentMethod}
         setSelectedPaymentMethod={setSelectedPaymentMethod}
@@ -35,7 +35,7 @@ export const PaymentMethodTitle = ({ paymentMethod, isCurrentlySelectedPaymentMe
           <span data-brand-icons-for-gateway={submarineConfig.gateway.id}>
             {paymentMethod.icons().map(icon => {
               return (
-                <PaymentMethodTitleIcon
+                <PaymentOptionTitleIcon
                   icon={icon}
                   label={submarineContext.translations.payment_methods.common.icons[icon]}
                 />

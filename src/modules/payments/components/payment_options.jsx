@@ -1,15 +1,14 @@
-import { useState } from "preact/compat";
-import { PaymentMethod } from "./payment_method";
+import { PaymentOption } from "./payment_option";
 
-export const PaymentMethods = ({ paymentMethods }) => {
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(paymentMethods[0]);
+export const PaymentOptions = ({ submarine, paymentMethods, selectedPaymentMethod, setSelectedPaymentMethod }) => {
   const canSelectPaymentMethod = paymentMethods.length > 1;
 
   return (
     <div className="content-box">
       {paymentMethods.map(paymentMethod => {
         return (
-          <PaymentMethod
+          <PaymentOption
+            submarine={submarine}
             paymentMethod={paymentMethod}
             selectedPaymentMethod={selectedPaymentMethod}
             setSelectedPaymentMethod={setSelectedPaymentMethod}

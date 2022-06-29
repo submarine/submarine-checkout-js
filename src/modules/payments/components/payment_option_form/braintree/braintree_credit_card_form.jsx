@@ -45,6 +45,11 @@ const BraintreeCreditCardForm = () => {
           <CreditCardVerificationValueTooltip />
         </div>
       </div>
+      <style>{"\
+        #braintree-hosted-field-number, #braintree-hosted-field-expirationDate, #braintree-hosted-field-cvv {\
+          height: 18px !important;\
+        "}
+      </style>
     </div>
   );
 };
