@@ -1,5 +1,5 @@
 import { useContext } from "preact/compat";
-import { SubmarineConfig } from "../contexts";
+import { SubmarineConfig } from "../../../common/contexts";
 
 export const PaymentOptionTitleInput = ({ paymentMethod, isCurrentlySelectedPaymentMethod, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
   const submarineConfig = useContext(SubmarineConfig);

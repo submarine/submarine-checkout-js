@@ -1,6 +1,6 @@
 import { useContext } from "preact/compat";
 import classNames from "classnames";
-import { SubmarineConfig, SubmarineContext } from "../contexts";
+import { SubmarineConfig, SubmarineContext } from "../../../common/contexts";
 import { PaymentOptionTitleInput } from "./payment_option_title_input";
 import { PaymentOptionTitleIcon } from "./payment_option_title_icon";
 

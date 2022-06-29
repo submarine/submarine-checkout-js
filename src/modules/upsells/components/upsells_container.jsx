@@ -1,4 +1,4 @@
-import { SubmarineConfig, SubmarineContext } from "./contexts";
+import { SubmarineConfig, SubmarineContext } from "../../common/contexts";
 import { Upsells } from "./upsells";
 
 export const UpsellsContainer = ({ submarine, upsells, submarineConfig, submarineContext }) => {

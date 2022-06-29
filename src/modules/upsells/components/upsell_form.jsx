@@ -1,6 +1,6 @@
 import { useContext, useState } from "preact/compat";
 import classNames from "classnames";
-import { SubmarineContext } from "./contexts";
+import { SubmarineContext } from "../../common/contexts";
 import { formatAmount } from "../../../lib/helpers";
 
 export const UpsellForm = ({ submarine, upsell, selectedVariant, setSelectedVariantIndex }) => {

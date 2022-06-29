@@ -1,7 +1,7 @@
 import CreditCardNumberTooltip from "../common/credit_card_number_tooltip";
 import CreditCardVerificationValueTooltip from "../common/credit_card_verification_value_tooltip";
 import { useContext } from "preact/compat";
-import { SubmarineContext } from "../../contexts";
+import { SubmarineContext } from "../../../../common/contexts";
 
 const BraintreeCreditCardForm = () => {
   const submarineContext = useContext(SubmarineContext);

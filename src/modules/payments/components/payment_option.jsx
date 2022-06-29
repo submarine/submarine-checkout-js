@@ -1,6 +1,6 @@
 import { Fragment } from "preact";
 import { useContext, useEffect, useState } from "preact/compat";
-import { SubmarineContext } from "./contexts";
+import { SubmarineContext } from "../../common/contexts";
 
 import { PaymentOptionTitle } from "./payment_option_title/payment_option_title";
 import { getPaymentOptionFormComponents } from "./payment_option_form/initialise";

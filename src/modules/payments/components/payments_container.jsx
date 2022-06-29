@@ -1,5 +1,5 @@
 import { Component } from "preact";
-import { SubmarineConfig, SubmarineContext } from "./contexts";
+import { SubmarineConfig, SubmarineContext } from "../../common/contexts";
 import { PaymentOptions } from "./payment_options";
 
 export class PaymentsContainer extends Component {
