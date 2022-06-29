@@ -30,11 +30,17 @@ export class PaymentsContainer extends Component {
   }
 
   formSubmitted(e) {
+    const { paymentForm, submarine, submarineContext } = this.props;
     const { selectedPaymentMethod } = this.state;
+
+    // if the form has been flagged as okay to submit, submit as normal
+    if(paymentForm.attributes.submarineSubmit === true) {
+      return true;
+    }
 
     // if no currently selected payment method, return without preventing submission
     if(!selectedPaymentMethod) {
-      return;
+      return true;
     }
 
     e.preventDefault();
@@ -53,7 +59,29 @@ export class PaymentsContainer extends Component {
       return false;
     }
 
-    alert('form was submitted!');
+    // perform any processing of the payment method
+    selectedPaymentMethod.process({ submarineContext })
+    .then((processResult) => {
+      const payload = {
+        preliminary_payment_method: processResult
+      };
+
+      submarine.api.createPreliminaryPaymentMethod(payload, (result, errors) => {
+        if(result && result.success) {
+          paymentForm.attributes.submarineSubmit = true;
+          paymentForm.submit();
+          return false;
+        }
+
+        this.stopFormLoading();
+      })
+      .catch((errors) => {
+        this.stopFormLoading();
+      });
+    })
+    .catch((errors) => {
+      this.stopFormLoading();
+    });
   }
 
   startFormLoading() {
