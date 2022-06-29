@@ -47,21 +47,6 @@ const initialise = () => {
 
     // initialise a SubmarineCheckout object and make it accessible to the window
     window.submarineCheckout = new SubmarineCheckout({ document, submarineConfig, submarineContext, Shopify });
-
-    // find the Submarine payment_methods gateway on the page
-    // console.log('finding gateway?...', `[data-select-gateway="${submarineConfig.submarineGatewayId}"]`);
-    // const submarineGatewayElement = document.querySelector(`[data-select-gateway="${submarineConfig.submarineGatewayId}"]`);
-
-    // bail if not on the payment_methods information page or Submarine gateway not present
-    // if((Shopify.Checkout.step !== 'payment_method') || !submarineGatewayElement) { return; }
-
-    // find the payment_methods subform
-    // console.log('finding subform...', '[data-payment_methods-subform="required"]');
-    // const paymentSubformElement = document.querySelector('[data-payment_methods-subform="required"]');
-    // const paymentSubformContentElement = paymentSubformElement.querySelector('.content-box');
-
-    // render the Submarine payment_methods method app on the payment_methods subform
-    // render(<App submarineConfig={submarineConfig} submarineContext={submarineContext} />, paymentSubformElement, paymentSubformContentElement);
 }
 
 initialise();

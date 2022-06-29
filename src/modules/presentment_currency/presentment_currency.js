@@ -1,5 +1,6 @@
 import Module from "../module";
 import { ATTRIBUTE_PRESENTMENT_AMOUNT, ATTRIBUTE_PRESENTMENT_CURRENCY } from "../../constants";
+import { parseFormattedAmount, formatAmount } from "../../lib/helpers";
 
 // a list of css selectors that target DOM elements that display the order currency
 const CURRENCY_ELEMENT_SELECTORS = [
@@ -23,16 +24,6 @@ const getOrderAttribute = (submarineContext, attributeName) => {
   }
 
   return submarineContext.order.attributes[attributeName];
-};
-
-// helper method to extract an integer amount value from a formatted amount string
-const parseFormattedAmount = (formattedAmount) => {
-  return parseInt(formattedAmount.replace(/[^\d]/g, ''));
-};
-
-// helper method to format an integer amount value into a string
-const formatAmount = (amount) => {
-  return `$${(amount / 100).toFixed(2)}`;
 };
 
 export default class PresentmentCurrency extends Module {
