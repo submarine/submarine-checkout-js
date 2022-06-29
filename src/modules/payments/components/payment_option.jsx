@@ -5,7 +5,7 @@ import { SubmarineContext } from "../../common/contexts";
 import { PaymentOptionTitle } from "./payment_option_title/payment_option_title";
 import { getPaymentOptionFormComponents } from "./payment_option_form/initialise";
 
-export const PaymentOption = ({ submarine, paymentMethod, selectedPaymentMethod, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
+export const PaymentOption = ({ submarine, paymentMethod, selectedPaymentMethod, validationErrors, setSelectedPaymentMethod, canSelectPaymentMethod }) => {
   const isCurrentlySelectedPaymentMethod = (selectedPaymentMethod !== null) && (paymentMethod.id() === selectedPaymentMethod.id());
   const [loading, setLoading] = useState(true);
 
@@ -32,6 +32,7 @@ export const PaymentOption = ({ submarine, paymentMethod, selectedPaymentMethod,
       <PaymentOptionFormWrapper isCurrentlySelectedPaymentMethod={isCurrentlySelectedPaymentMethod} loading={loading}>
         <PaymentOptionForm
           paymentMethod={paymentMethod}
+          validationErrors={validationErrors}
           loading={loading}
         />
       </PaymentOptionFormWrapper>

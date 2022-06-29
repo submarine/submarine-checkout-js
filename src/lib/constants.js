@@ -23,7 +23,18 @@ export const DEFAULT_TRANSLATIONS = {
         "number": "Card number",
         "name": "Card number",
         "expiry": "Expiration date (MM \/ YY)",
-        "cvv": "Security code"
+        "cvv": "Security code",
+        "errors": {
+          "number": {
+            "invalid": "The provided credit card number is invalid."
+          },
+          "expirationDate": {
+            "invalid": "The provided expiration date is invalid."
+          },
+          "cvv": {
+            "invalid": "The provided security code is invalid."
+          }
+        }
       },
       "paypal": {
         "title": "PayPal"

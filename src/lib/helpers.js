@@ -1,3 +1,5 @@
+import get from 'lodash.get';
+
 // helper method to extract an integer amount value from a formatted amount string
 export const parseFormattedAmount = (formattedAmount) => {
   return parseInt(formattedAmount.replace(/[^\d]/g, ''));
@@ -29,4 +31,9 @@ export const mergeOptions = (defaults, options) => {
   });
 
   return result;
+};
+
+// return a translation
+export const t = (key, translations) => {
+  return get(translations, key, key);
 };

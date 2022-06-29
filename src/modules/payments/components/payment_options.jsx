@@ -1,6 +1,6 @@
 import { PaymentOption } from "./payment_option";
 
-export const PaymentOptions = ({ submarine, paymentMethods, selectedPaymentMethod, setSelectedPaymentMethod }) => {
+export const PaymentOptions = ({ submarine, paymentMethods, selectedPaymentMethod, validationErrors, setSelectedPaymentMethod }) => {
   const canSelectPaymentMethod = paymentMethods.length > 1;
 
   return (
@@ -11,6 +11,7 @@ export const PaymentOptions = ({ submarine, paymentMethods, selectedPaymentMetho
             submarine={submarine}
             paymentMethod={paymentMethod}
             selectedPaymentMethod={selectedPaymentMethod}
+            validationErrors={validationErrors}
             setSelectedPaymentMethod={setSelectedPaymentMethod}
             canSelectPaymentMethod={canSelectPaymentMethod}
           />

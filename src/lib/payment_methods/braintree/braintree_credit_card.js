@@ -59,19 +59,60 @@ export default class BraintreeCreditCard extends PaymentMethod {
   // set up the braintree credit card payment method
   setup({ submarine, submarineContext }) {
     return new Promise((resolve, reject) => {
-      submarine.api.generatePaymentProcessorClientToken('braintree', clientToken => {
+      submarine.api.generatePaymentProcessorClientToken('braintree', (clientToken, errors) => {
+        if(errors) {
+          reject(errors);
+          return;
+        }
+
         braintree.client.create({
           authorization: clientToken.token
         })
         .then(clientInstance => {
           const hostedFieldsOptions = getHostedFieldsOptions(clientInstance, submarineContext);
-          braintree.hostedFields.create(hostedFieldsOptions)
+          braintree.hostedFields.create(
+            hostedFieldsOptions
+          )
+          .then(hostedFieldsInstance => {
+            // store a reference to the hosted fields instance for later use
+            this.hostedFieldsInstance = hostedFieldsInstance;
+
+            // resolve successfully
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
         })
-        .then(hostedFieldsInstance => {
-          resolve();
-        })
+        .catch(error => {
+          reject(error);
+        });
+      })
+      .catch(error => {
+        reject(error);
       });
     });
+  }
+
+  // validate hosted fields
+  validate() {
+    const state = this.hostedFieldsInstance.getState();
+
+    const validationErrors = Object.entries(state.fields)
+      .filter(([fieldName, field]) => !field.isValid)
+      .map(([fieldName, field]) => {
+        return {
+          name: fieldName,
+          error: 'invalid'
+        }
+      });
+
+    // before returning, we focus the first invalid field if present
+    if(validationErrors.length > 0) {
+      this.hostedFieldsInstance.focus(validationErrors[0].name);
+    }
+
+    return validationErrors;
   }
 
 }

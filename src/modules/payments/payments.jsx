@@ -29,6 +29,10 @@ export default class Payments extends Module {
     const paymentSubformElement = document.querySelector('[data-payment-subform="required"]');
     const paymentSubformContentElement = paymentSubformElement.querySelector('.content-box');
 
+    // get references to the payment form and submit button
+    const paymentForm = submarineGatewayElement.closest('[data-payment-form]');
+    const paymentFormButton = paymentForm.querySelector('button[type="submit"]');
+
     // render the Submarine payment methods container component on the submarine gateway element
     render(
       <PaymentsContainer
@@ -36,6 +40,8 @@ export default class Payments extends Module {
         submarineConfig={submarineConfig}
         submarineContext={submarineContext}
         paymentMethods={paymentMethods}
+        paymentForm={paymentForm}
+        paymentFormButton={paymentFormButton}
       />,
       paymentSubformElement,
       paymentSubformContentElement

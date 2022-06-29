@@ -39,4 +39,18 @@ export default class PaymentMethod {
   // this method must return a Promise object which resolves on success or rejects on error
   setup({ submarine, submarineContext }) {}
 
+  // validate this payment method
+  // this method must return an array of validation errors (if any exist) in the following format:
+  //
+  // [
+  //   {
+  //      "name": "cvv",
+  //      "error": "missing"
+  //   }
+  // ]
+  //
+  validate() {
+    return [];
+  }
+
 }

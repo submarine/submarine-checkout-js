@@ -30,6 +30,7 @@
   "dependencies": {
     "@lemuria/load-scripts": "^1.2.0",
     "classnames": "^2.3.1",
+    "lodash.get": "^4.4.2",
     "preact": "^10.7.3",
     "submarine-js": "^0.4.0-beta.2"
   },
