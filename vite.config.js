@@ -6,7 +6,7 @@ import preact from '@preact/preset-vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/main.js'),
+      entry: path.resolve(__dirname, 'src/index.js'),
       formats: ['es', 'iife', 'umd'],
       name: 'SubmarineCheckout',
       fileName: (format) => format === 'iife' ? 'submarine-checkout.js' : `submarine-checkout.${format}.js`

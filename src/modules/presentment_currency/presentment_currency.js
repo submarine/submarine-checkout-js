@@ -1,5 +1,5 @@
 import Module from "../module";
-import { ATTRIBUTE_PRESENTMENT_AMOUNT, ATTRIBUTE_PRESENTMENT_CURRENCY } from "../../constants";
+import { ATTRIBUTE_PRESENTMENT_AMOUNT, ATTRIBUTE_PRESENTMENT_CURRENCY } from "../../lib/constants";
 import { parseFormattedAmount, formatAmount } from "../../lib/helpers";
 
 // a list of css selectors that target DOM elements that display the order currency

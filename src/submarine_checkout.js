@@ -1,7 +1,9 @@
+// submarine_checkout.js
+
 import { Submarine } from 'submarine-js';
 import loadScripts from '@lemuria/load-scripts'
 
-import { initialisePaymentMethod } from "./payment_methods/initialise";
+import { initialisePaymentMethod } from "./lib/payment_methods/initialise";
 
 import Payments from "./modules/payments/Payments";
 import PresentmentCurrency from "./modules/presentment_currency/presentment_currency";

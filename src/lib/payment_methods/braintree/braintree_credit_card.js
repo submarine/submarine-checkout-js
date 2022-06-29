@@ -58,17 +58,19 @@ export default class BraintreeCreditCard extends PaymentMethod {
 
   // set up the braintree credit card payment method
   setup({ submarine, submarineContext }) {
-    submarine.api.generatePaymentProcessorClientToken('braintree', clientToken => {
-      braintree.client.create({
-        authorization: clientToken.token
-      })
-      .then(clientInstance => {
-        const hostedFieldsOptions = getHostedFieldsOptions(clientInstance, submarineContext);
-        braintree.hostedFields.create(hostedFieldsOptions)
-      })
-      .then(hostedFieldsInstance => {
-        // do nothing for now
-      })
+    return Promise.new((resolve, reject) => {
+      submarine.api.generatePaymentProcessorClientToken('braintree', clientToken => {
+        braintree.client.create({
+          authorization: clientToken.token
+        })
+        .then(clientInstance => {
+          const hostedFieldsOptions = getHostedFieldsOptions(clientInstance, submarineContext);
+          braintree.hostedFields.create(hostedFieldsOptions)
+        })
+        .then(hostedFieldsInstance => {
+          resolve();
+        })
+      });
     });
   }
 

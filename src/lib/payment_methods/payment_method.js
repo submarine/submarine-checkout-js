@@ -1,8 +1,8 @@
 export default class PaymentMethod {
 
   // initialise this payment method class
-  constructor(paymentMethod) {
-    this.paymentMethod = paymentMethod;
+  constructor(paymentMethodData) {
+    this.paymentMethodData = paymentMethodData;
   }
 
   // return true if this payment method is available in the provided context
@@ -12,17 +12,17 @@ export default class PaymentMethod {
 
   // return the payment method id
   id() {
-    return this.paymentMethod.id;
+    return this.paymentMethodData.id;
   }
 
   // return the processor
   processor() {
-    return this.paymentMethod.payment_processor;
+    return this.paymentMethodData.payment_processor;
   }
 
   // return the payment method type
   type() {
-    return this.paymentMethod.payment_method_type;
+    return this.paymentMethodData.payment_method_type;
   }
 
   // return the icons to display for this payment method type
@@ -36,6 +36,7 @@ export default class PaymentMethod {
   }
 
   // set up this payment method
+  // this method must return a Promise object which resolves on success or rejects on error
   setup({ submarine, submarineContext }) {}
 
 }

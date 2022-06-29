@@ -23,7 +23,7 @@ const BraintreeCreditCardForm = () => {
           <label className="field__label field__label--visible" htmlFor="checkout_credit_card_name">
             {submarineContext.translations.payment_methods.braintree["credit-card"].name}
           </label>
-          <input type="text" placeholder="Name on card" className="field__input"/>
+          <input type="text" placeholder="Name on card" className="field__input" />
         </div>
       </div>
 

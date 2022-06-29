@@ -7,3 +7,26 @@ export const parseFormattedAmount = (formattedAmount) => {
 export const formatAmount = (amount) => {
   return `$${(amount / 100).toFixed(2)}`;
 };
+
+// parse a JSON configuration object from the DOM
+export const parseJSONScript = (document, id) => {
+  const script = document.getElementById(id);
+  try {
+    return JSON.parse(script.innerHTML);
+  } catch { return null; }
+};
+
+// deep merge a simple options objects
+export const mergeOptions = (defaults, options) => {
+  const result = Object.assign({}, defaults);
+
+  Object.keys(options).forEach(key => {
+    if(options[key] instanceof Object) {
+      result[key] = mergeOptions(defaults[key], options[key]);
+    } else {
+      result[key] = options[key];
+    }
+  });
+
+  return result;
+};
