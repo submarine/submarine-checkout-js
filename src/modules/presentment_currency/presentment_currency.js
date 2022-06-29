@@ -1,3 +1,7 @@
+// presentment_currency.js
+// This module loads on the thankyou and order status steps of checkout and converts displayed currency elements for
+// orders that have been processed with Submarine's multi-currency support.
+
 import Module from "../module";
 import { ATTRIBUTE_PRESENTMENT_AMOUNT, ATTRIBUTE_PRESENTMENT_CURRENCY } from "../../lib/constants";
 import { parseFormattedAmount, formatAmount } from "../../lib/helpers";

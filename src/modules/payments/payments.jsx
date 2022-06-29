@@ -1,3 +1,6 @@
+// payments.jsx
+// This module loads on the payment step of checkout and renders the available Submarine payment options.
+
 import Module from "../module";
 import { render } from "preact";
 import { PaymentMethodsContainer } from "./components/payment_methods_container";

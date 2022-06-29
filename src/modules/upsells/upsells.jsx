@@ -1,3 +1,6 @@
+// upsells.jsx
+// This module loads on the thankyou step of checkout and presents the customer with upsell options if available.
+
 import Module from "../module";
 import { render } from "preact";
 import { UpsellsContainer } from "./components/upsells_container";
