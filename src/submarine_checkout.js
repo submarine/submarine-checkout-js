@@ -5,8 +5,9 @@ import loadScripts from '@lemuria/load-scripts'
 
 import { initialisePaymentMethod } from "./lib/payment_methods/initialise";
 
-import Payments from "./modules/payments/Payments";
-import PresentmentCurrency from "./modules/presentment_currency/presentment_currency";
+import CheckoutAttributes from "./modules/checkout_attributes/checkout_attributes";
+import DisplayPresentmentCurrency from "./modules/display_presentment_currency/display_presentment_currency";
+import Payments from "./modules/payments/payments";
 import Upsells from "./modules/upsells/upsells";
 
 export class SubmarineCheckout {
@@ -29,8 +30,9 @@ export class SubmarineCheckout {
 
   buildModules(options) {
     return [
+      new CheckoutAttributes(options),
+      new DisplayPresentmentCurrency(options),
       new Payments(options),
-      new PresentmentCurrency(options),
       new Upsells(options)
     ];
   }

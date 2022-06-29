@@ -4,12 +4,13 @@
 import Module from "../module";
 import { render } from "preact";
 import { PaymentsContainer } from "./components/payments_container";
+import { STEP_PAYMENT_METHOD } from "../../lib/constants";
 
 export default class Payments extends Module {
 
   steps() {
     return [
-      'payment_method'
+      STEP_PAYMENT_METHOD
     ];
   }
 

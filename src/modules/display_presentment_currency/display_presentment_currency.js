@@ -1,9 +1,14 @@
-// presentment_currency.js
+// display_presentment_currency.js
 // This module loads on the thankyou and order status steps of checkout and converts displayed currency elements for
 // orders that have been processed with Submarine's multi-currency support.
 
 import Module from "../module";
-import { ATTRIBUTE_PRESENTMENT_AMOUNT, ATTRIBUTE_PRESENTMENT_CURRENCY } from "../../lib/constants";
+import {
+  ATTRIBUTE_PRESENTMENT_AMOUNT,
+  ATTRIBUTE_PRESENTMENT_CURRENCY,
+  STEP_ORDER_STATUS,
+  STEP_THANK_YOU
+} from "../../lib/constants";
 import { parseFormattedAmount, formatAmount } from "../../lib/helpers";
 
 // a list of css selectors that target DOM elements that display the order currency
@@ -30,16 +35,16 @@ const getOrderAttribute = (submarineContext, attributeName) => {
   return submarineContext.order.attributes[attributeName];
 };
 
-export default class PresentmentCurrency extends Module {
+export default class DisplayPresentmentCurrency extends Module {
 
   steps() {
     return [
-      'thank_you',
-      'order_status'
+      STEP_ORDER_STATUS,
+      STEP_THANK_YOU
     ];
   }
 
-  // initialise the presentment_currency module
+  // initialise the display_presentment_currency module
   initialise() {
     const { document, submarineContext } = this.options;
 

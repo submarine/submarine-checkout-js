@@ -1,3 +1,4 @@
+export const ATTRIBUTE_PAYMENT_METHOD = '_payment_method';
 export const ATTRIBUTE_PRESENTMENT_AMOUNT = '_presentment_amount';
 export const ATTRIBUTE_PRESENTMENT_CURRENCY = '_presentment_currency';
 
@@ -47,3 +48,7 @@ export const ICON_AMEX = 'american-express';
 export const ICON_MASTERCARD = 'master';
 export const ICON_PAYPAL = 'paypal';
 export const ICON_VISA = 'visa';
+
+export const STEP_ORDER_STATUS = 'order_status';
+export const STEP_PAYMENT_METHOD = 'payment_method';
+export const STEP_THANK_YOU = 'thank_you';

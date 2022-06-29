@@ -12,7 +12,7 @@ export default class Module {
   // return true if this module should be active based on the current checkout step
   isActive() {
     const { Shopify } = this.options;
-    return this.steps().includes(Shopify.Checkout.step);
+    return this.steps().includes(Shopify.Checkout.step || (Shopify.Checkout.OrderStatus ? 'order_status' : ''));
   }
 
   // initialise this module
