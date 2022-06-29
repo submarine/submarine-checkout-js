@@ -34,16 +34,17 @@ export class PaymentsContainer extends Component {
     const { selectedPaymentMethod } = this.state;
 
     // if the form has been flagged as okay to submit, submit as normal
-    if(paymentForm.attributes.submarineSubmit === true) {
+    if(paymentForm.dataset.submarineSubmit === 'ok') {
       return true;
     }
 
-    // if no currently selected payment method, return without preventing submission
+    // if no currently selected Submarine payment method, return without preventing submission
     if(!selectedPaymentMethod) {
       return true;
     }
 
     e.preventDefault();
+    e.stopPropagation();
 
     // start loading
     this.startFormLoading();
@@ -67,8 +68,8 @@ export class PaymentsContainer extends Component {
       };
 
       submarine.api.createPreliminaryPaymentMethod(payload, (result, errors) => {
-        if(result && result.success) {
-          paymentForm.attributes.submarineSubmit = true;
+        if(!errors) {
+          paymentForm.dataset.submarineSubmit = 'ok';
           paymentForm.submit();
           return false;
         }
