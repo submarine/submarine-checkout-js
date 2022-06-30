@@ -41,6 +41,10 @@ export const UpsellForm = ({ submarine, upsell, exchangeRate, selectedVariant, s
             const sourceElement = parsedDocument.querySelector(selector);
             const targetElement = document.querySelector(selector);
 
+            if(!sourceElement || !targetElement) {
+              return;
+            }
+
             targetElement.replaceWith(sourceElement);
           });
 
