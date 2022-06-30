@@ -66,7 +66,7 @@ export default class PaymentMethod {
       customer_payment_method_id: null,
       payment_method_type: this.type(),
       payment_processor: this.processor(),
-      presentment_total_price: submarineContext.checkout.totalPrice,
+      presentment_total_price: submarineContext.checkout.totalPricePresentment,
       presentment_currency: submarineContext.checkout.currency,
       shop_payment_method_id: this.id(),
     }, additionalData);

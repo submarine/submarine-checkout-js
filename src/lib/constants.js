@@ -1,6 +1,7 @@
 export const ATTRIBUTE_PAYMENT_METHOD = '_payment_method';
 export const ATTRIBUTE_PRESENTMENT_AMOUNT = '_presentment_amount';
 export const ATTRIBUTE_PRESENTMENT_CURRENCY = '_presentment_currency';
+export const ATTRIBUTE_PRESENTMENT_TOTAL_PRICE = 'presentment_total_price';
 
 export const DEFAULT_TRANSLATIONS = {
   "payment_methods": {

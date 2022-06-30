@@ -58,7 +58,7 @@ export default class CheckoutAttributes extends Module {
     const { submarineContext } = this.options;
 
     // create a copy of existing attributes attached to the checkout
-    const attributes = Object.assign({}, submarineContext.checkout.attributes);
+    const attributes = Object.assign({}, submarineContext.checkout.attributes || {});
 
     // remove any attributes that are managed elsewhere
     IGNORED_ATTRIBUTES.forEach(key => delete attributes[key]);
