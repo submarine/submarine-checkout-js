@@ -10,7 +10,7 @@ import {
   STEP_ORDER_STATUS,
   STEP_THANK_YOU
 } from "../../lib/constants";
-import { parseFormattedAmount, formatAmount } from "../../lib/helpers";
+import { parseFormattedAmount, formatAmount, formatReductionAmount } from "../../lib/helpers";
 
 // a list of css selectors that target DOM elements that display the order currency
 const CURRENCY_ELEMENT_SELECTORS = [
@@ -21,10 +21,16 @@ const CURRENCY_ELEMENT_SELECTORS = [
 const PRICE_ELEMENT_SELECTORS = [
   '.payment-due__price',
   '.product__price .order-summary__emphasis',
+  '.product__price .order-summary__small-text',
   '[data-checkout-subtotal-price-target]',
   '[data-checkout-total-shipping-target]',
   '[data-checkout-total-taxes-target]',
   '.payment-method-list__item__amount'
+];
+
+// a list of css selectors that target DOM elements that display a reduction price value
+const REDUCTION_PRICE_ELEMENT_SELECTORS = [
+  '.reduction-code .reduction-code__text'
 ];
 
 // helper method to retrieve a specific order attribute
@@ -69,6 +75,9 @@ export default class DisplayPresentmentCurrency extends Module {
 
     // convert elements that display prices
     PRICE_ELEMENT_SELECTORS.forEach(selector => this.convertPriceElements(document, selector, exchangeRate));
+
+    // convert elements that display reduction prices
+    REDUCTION_PRICE_ELEMENT_SELECTORS.forEach(selector => this.convertReductionPriceElements(document, selector, exchangeRate));
   }
 
   // find all currency elements matching the given selector and update them
@@ -84,6 +93,14 @@ export default class DisplayPresentmentCurrency extends Module {
       const shopAmount = parseFormattedAmount(element.innerText);
       const presentmentAmount = shopAmount * exchangeRate;
       element.innerText = formatAmount(presentmentAmount);
+    });
+  }
+
+  convertReductionPriceElements(document, selector, exchangeRate) {
+    document.querySelectorAll(selector).forEach(element => {
+      const shopAmount = parseFormattedAmount(element.innerText);
+      const presentmentAmount = shopAmount * exchangeRate;
+      element.innerText = formatReductionAmount(presentmentAmount);
     });
   }
 
