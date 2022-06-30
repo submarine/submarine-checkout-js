@@ -7,7 +7,7 @@ import { Fragment } from "preact";
 import ErrorMessage from "../common/error_message";
 import { t } from "../../../../../lib/helpers";
 
-const BraintreeCreditCardForm = ({ validationErrors, loading }) => {
+const BraintreeCreditCardForm = ({ validationErrors, loading, setAdditionalData }) => {
   const submarineContext = useContext(SubmarineContext);
 
   // convert any validation errors to a translated list of messages
@@ -21,10 +21,17 @@ const BraintreeCreditCardForm = ({ validationErrors, loading }) => {
     'field__input--iframe-container': loading
   });
 
-  // the name element is not managed by Braintree, so we
+  // the name element is not managed by Braintree, so we render it conditionally based on load state
   let nameElement = <div id="braintree-credit-card-name" className="field__input field__input--iframe-container" />;
   if(!loading) {
-    nameElement = <input type="text" placeholder="Name on card" className="field__input" />;
+    nameElement = (
+      <input
+        type="text"
+        placeholder="Name on card"
+        className="field__input"
+        onChange={e => setAdditionalData({ cardholderName: e.target.value })}
+      />
+    );
   }
 
   return (

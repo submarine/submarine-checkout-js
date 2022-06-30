@@ -55,7 +55,7 @@ export default class PaymentMethod {
 
   // Process this payment method (typically, this means tokenising the information we have available).
   // This method must return a Promise object which resolves on success or rejects on error.
-  process({ submarineContext }) {}
+  process({ additionalData, submarineContext }) {}
 
   // Return an object containing the standardised information to be returned from a successful process() call.
   // This information is passed directly for the creation of a preliminary payment method.

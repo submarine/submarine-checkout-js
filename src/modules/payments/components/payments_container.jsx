@@ -5,8 +5,15 @@ import { PaymentOptions } from "./payment_options";
 export class PaymentsContainer extends Component {
 
   state = {
+    additionalData: {},
     selectedPaymentMethod: this.props.paymentMethods[0],
     validationErrors: []
+  }
+
+  setAdditionalData(additionalData) {
+    this.setState({
+      additionalData: Object.assign({}, this.state.additionalData, additionalData)
+    });
   }
 
   setSelectedPaymentMethod(paymentMethod) {
@@ -31,7 +38,7 @@ export class PaymentsContainer extends Component {
 
   formSubmitted(e) {
     const { paymentForm, submarine, submarineContext } = this.props;
-    const { selectedPaymentMethod } = this.state;
+    const { additionalData, selectedPaymentMethod } = this.state;
 
     // if the form has been flagged as okay to submit, submit as normal
     if(paymentForm.dataset.submarineSubmit === 'ok') {
@@ -61,7 +68,7 @@ export class PaymentsContainer extends Component {
     }
 
     // perform any processing of the payment method
-    selectedPaymentMethod.process({ submarineContext })
+    selectedPaymentMethod.process({ additionalData, submarineContext })
     .then((processResult) => {
       const payload = {
         preliminary_payment_method: processResult
@@ -111,6 +118,7 @@ export class PaymentsContainer extends Component {
             paymentMethods={paymentMethods}
             selectedPaymentMethod={selectedPaymentMethod}
             validationErrors={validationErrors}
+            setAdditionalData={this.setAdditionalData.bind(this)}
             setSelectedPaymentMethod={this.setSelectedPaymentMethod.bind(this)}
           />
         </SubmarineContext.Provider>

@@ -116,8 +116,12 @@ export default class BraintreeCreditCard extends PaymentMethod {
   }
 
   // tokenise
-  process({ submarineContext }) {
-    const tokenizeData = { cardholderName: 'Gavin Ballard' };
+  process({ additionalData, submarineContext }) {
+    const tokenizeData = {
+      cardholderName: additionalData.cardholderName
+    };
+
+    console.log('tokenizeData', tokenizeData);
 
     return new Promise((resolve, reject) => {
       this.hostedFieldsInstance.tokenize(tokenizeData, (tokenizeError, payload) => {

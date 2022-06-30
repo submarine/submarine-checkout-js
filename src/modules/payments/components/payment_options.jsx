@@ -8,7 +8,7 @@ import {
   ATTRIBUTE_PRESENTMENT_TOTAL_PRICE
 } from "../../../lib/constants";
 
-export const PaymentOptions = ({ submarine, paymentMethods, selectedPaymentMethod, validationErrors, setSelectedPaymentMethod }) => {
+export const PaymentOptions = ({ submarine, paymentMethods, selectedPaymentMethod, validationErrors, setAdditionalData, setSelectedPaymentMethod }) => {
   const submarineConfig = useContext(SubmarineConfig);
   const submarineContext = useContext(SubmarineContext);
   const canSelectPaymentMethod = paymentMethods.length > 1;
@@ -50,6 +50,7 @@ export const PaymentOptions = ({ submarine, paymentMethods, selectedPaymentMetho
             paymentMethod={paymentMethod}
             selectedPaymentMethod={selectedPaymentMethod}
             validationErrors={validationErrors}
+            setAdditionalData={setAdditionalData}
             setSelectedPaymentMethod={setSelectedPaymentMethod}
             canSelectPaymentMethod={canSelectPaymentMethod}
           />
