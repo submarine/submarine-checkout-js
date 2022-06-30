@@ -7,26 +7,32 @@ export const Upsell = ({ submarine, upsell, exchangeRate }) => {
   const selectedVariant = upsell.variants[selectedVariantIndex];
 
   return (
-    <div className="submarine-upsells--upsell">
-      <div className="submarine-upsells--image-wrapper">
-        <div className="submarine-upsells--image-wrapper--image">
-          <img src={upsell.featured_image} alt={upsell.title} />
+    <tr className="product">
+      <td className="product__image">
+        <div className="product-thumbnail product-thumbnail--small">
+          <div className="product-thumbnail__wrapper">
+            <img
+              alt={upsell.title}
+              className="product-thumbnail__image"
+              src={upsell.featured_image}
+            />
+          </div>
         </div>
-      </div>
-
-      <div className="submarine-upsells--price-wrapper">
-        <h4>{upsell.title}</h4>
+      </td>
+      <td className="product__description">
+        <span className="product__description__name emphasis">
+          {upsell.title}
+        </span>
         {selectedVariant.upsellDiscount > 0 &&
-          <p>
-            <del>{formatAmount(selectedVariant.price * exchangeRate)}</del> <span>{selectedVariant.upsellDiscount}% off</span>
-          </p>
+          <span className="product__description__variant small-text">
+            <del>{formatAmount(selectedVariant.price * exchangeRate)}</del> ({selectedVariant.upsellDiscount}% off)
+          </span>
         }
-        <p>
-          <strong>{formatAmount(selectedVariant.upsellPrice * exchangeRate)}</strong>
-        </p>
-      </div>
-
-      <div className="submarine-upsells--form-wrapper">
+        <span className="product__description__variant small-text">
+          {formatAmount(selectedVariant.upsellPrice * exchangeRate)}
+        </span>
+      </td>
+      <td className="product__status">
         <UpsellForm
           submarine={submarine}
           upsell={upsell}
@@ -34,7 +40,7 @@ export const Upsell = ({ submarine, upsell, exchangeRate }) => {
           selectedVariant={selectedVariant}
           setSelectedVariantIndex={setSelectedVariantIndex}
         />
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 };

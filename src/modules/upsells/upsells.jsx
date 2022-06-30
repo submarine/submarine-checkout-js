@@ -104,15 +104,17 @@ export default class Upsells extends Module {
   renderUpsells(submarine, upsells) {
     const { document, submarineConfig, submarineContext } = this.options;
 
-    // find the body content element
-    const contentElement = document.querySelector("[data-content]");
-    const firstContentElement = contentElement.firstChild;
+    // find the first section element
+    const sectionsElement = document.querySelector("[data-step] .step__sections");
+    const firstSectionElement = document.querySelector("[data-step] .step__sections .section");
+    const secondSectionElement = firstSectionElement.nextSibling;
 
     // create a container node to render into
     const containerElement = document.createElement("div");
+    containerElement.classList.add('section');
 
     // insert the container node into the content element
-    contentElement.insertBefore(containerElement, firstContentElement);
+    sectionsElement.insertBefore(containerElement, secondSectionElement);
 
     // render the upsells component into the page
     render(
