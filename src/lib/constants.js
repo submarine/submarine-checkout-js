@@ -54,3 +54,5 @@ export const ICON_VISA = 'visa';
 export const STEP_ORDER_STATUS = 'order_status';
 export const STEP_PAYMENT_METHOD = 'payment_method';
 export const STEP_THANK_YOU = 'thank_you';
+
+export const UPSELL_AGE_LIMIT_IN_SECONDS = 3000;

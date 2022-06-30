@@ -4,7 +4,7 @@
 import Module from "../module";
 import { render } from "preact";
 import { UpsellsContainer } from "./components/upsells_container";
-import { STEP_ORDER_STATUS, STEP_THANK_YOU } from "../../lib/constants";
+import { STEP_ORDER_STATUS, STEP_THANK_YOU, UPSELL_AGE_LIMIT_IN_SECONDS } from "../../lib/constants";
 
 export default class Upsells extends Module {
 
@@ -24,8 +24,10 @@ export default class Upsells extends Module {
       return;
     }
 
-    // bail if we're outside the time window for upsells (60 minutes)
-    // @TODO
+    // bail if we're outside the time window for upsells
+    if(submarineContext.order.ageInSeconds > UPSELL_AGE_LIMIT_IN_SECONDS) {
+      return;
+    }
 
     // generate a list of upsells for this order
     this.generateUpsells(submarine);
