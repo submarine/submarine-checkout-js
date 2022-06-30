@@ -66,6 +66,17 @@ export default class DisplayPresentmentCurrency extends Module {
     // calculate the exchange rate
     const exchangeRate = presentmentTotalPrice / shopTotalPrice;
 
+    // perform an initial conversion
+    this.convertAll(document, presentmentCurrency, exchangeRate);
+
+    // set up an event listener to convert on page changes
+    document.addEventListener('page:change', () => {
+      this.convertAll(document, presentmentCurrency, exchangeRate);
+    });
+  }
+
+  // perform converstion
+  convertAll(document, presentmentCurrency, exchangeRate) {
     // convert elements that display the currency
     CURRENCY_ELEMENT_SELECTORS.forEach(selector => this.convertCurrencyElements(document, selector, presentmentCurrency));
 
@@ -79,7 +90,7 @@ export default class DisplayPresentmentCurrency extends Module {
   // find all currency elements matching the given selector and update them
   convertCurrencyElements(document, selector, presentmentCurrency) {
     document.querySelectorAll(selector).forEach(element => {
-      element.innerText = presentmentCurrency;
+      this.updateElement(element, presentmentCurrency);
     });
   }
 
@@ -88,16 +99,26 @@ export default class DisplayPresentmentCurrency extends Module {
     document.querySelectorAll(selector).forEach(element => {
       const shopAmount = parseFormattedAmount(element.innerText);
       const presentmentAmount = shopAmount * exchangeRate;
-      element.innerText = formatAmount(presentmentAmount);
+      this.updateElement(element, formatAmount(presentmentAmount));
     });
   }
 
+  // find all price reduction elements matching the given selector and update them
   convertReductionPriceElements(document, selector, exchangeRate) {
     document.querySelectorAll(selector).forEach(element => {
       const shopAmount = parseFormattedAmount(element.innerText);
       const presentmentAmount = shopAmount * exchangeRate;
-      element.innerText = formatReductionAmount(presentmentAmount);
+      this.updateElement(element, formatReductionAmount(presentmentAmount));
     });
+  }
+
+  // update the given element with the provided innerText, but include a check to avoid double updates
+  updateElement(element, value) {
+    if(element.dataset.converted) {
+      return;
+    }
+    element.innerText = value;
+    element.dataset.converted = true;
   }
 
 }
