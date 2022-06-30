@@ -16,11 +16,13 @@ export const Upsell = ({ submarine, upsell }) => {
 
       <div className="submarine-upsells--price-wrapper">
         <h4>{upsell.title}</h4>
+        {selectedVariant.upsellDiscount > 0 &&
+          <p>
+            <del>{formatAmount(selectedVariant.price)}</del> <span>{selectedVariant.upsellDiscount}% off</span>
+          </p>
+        }
         <p>
-          <del>{formatAmount(upsell.price)}</del> <span>58%</span>
-        </p>
-        <p>
-          <strong>{formatAmount(upsell.price)}</strong>
+          <strong>{formatAmount(selectedVariant.upsellPrice)}</strong>
         </p>
       </div>
 

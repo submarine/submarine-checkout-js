@@ -33,50 +33,72 @@ export default class Upsells extends Module {
 
   generateUpsells(submarine) {
     const { submarineContext } = this.options;
-
     const productIds = submarineContext.order.productIds;
-    // const orderLocale = submarineContext.order.locale || ''; - locale-aware recommendations not currently available
-    const recommendationRequests = productIds.map(productId => fetch(`/recommendations/products.json?product_id=${productId}&limit=10`).then(response => response.json()));
 
-    Promise.all(recommendationRequests).then(recommendedProducts => {
-      const recommendations = {};
+    // start by fetching a list of upsellable products
+    fetch('/collections/all?filter.v.m.submarine.permit_upsell=true&view=upsells')
+      .then(response => response.json())
+      .then(upsellableProducts => {
+        // remove products that already exist in the order
+        productIds.forEach(productId => delete upsellableProducts[productId]);
 
-      // build up upsells
-      recommendedProducts.forEach(recommendation => {
-        recommendation.products.forEach((product, index) => {
-          // don't recommend products in the order
-          if(productIds.includes(product.id)) {
+        // then, fetch recommended products based on the current order
+        const recommendationRequests = productIds.map(productId => fetch(`/recommendations/products.json?product_id=${productId}&limit=10`).then(response => response.json()));
+
+        Promise.all(recommendationRequests).then(recommendedProducts => {
+          const recommendations = {};
+
+          // build up recommendation rankings
+          recommendedProducts.forEach(recommendation => {
+            recommendation.products.forEach((product, index) => {
+              // don't recommend products in the order
+              if(productIds.includes(product.id)) {
+                return;
+              }
+
+              // don't recommend products that aren't in the upsellable list
+              if(upsellableProducts[product.id] === undefined) {
+                return;
+              }
+
+              // otherwise, if the product hasn't been seen before, add it
+              if(recommendations[product.id] === undefined) {
+                recommendations[product.id] = upsellableProducts[product.id];
+                recommendations[product.id].rank = 0;
+              }
+
+              // increment the product's rank by the index
+              recommendations[product.id].rank += 10 - index;
+            });
+          });
+
+          // convert recommendations into list of upsells
+          const upsells = Object.keys(recommendations).map(productId => upsellableProducts[productId]);
+
+          // bail if no upsells available
+          if(upsells.length === 0) {
             return;
           }
 
-          // otherwise, if the product hasn't been seen before, add it
-          if(recommendations[product.id] === undefined) {
-            recommendations[product.id] = product;
-            recommendations[product.id].rank = 0;
+          // filter variants in the resulting list
+          upsells.forEach(upsell => {
+            upsell.variants = upsell.variants.filter(variant => {
+              return variant.permitUpsell;
+            });
+          });
+
+          // sort upsells by rank
+          upsells.sort((a, b) => b.rank - a.rank);
+
+          // trim upsells to a maximum of 5 options
+          if(upsells.length > 5) {
+            upsells.length = 5;
           }
 
-          // increment the product's rank by the index
-          recommendations[product.id].rank += 10 - index;
+          // render available upsells
+          this.renderUpsells(submarine, upsells);
         });
       });
-
-      // convert products into list of upsells
-      const upsells = Object.keys(recommendations).map(productId => recommendations[productId]);
-
-      // bail if no upsells available
-      if(upsells.length === 0) {
-        return;
-      }
-
-      // sort upsells by rank
-      upsells.sort((a, b) => a.rank - b.rank);
-
-      // trim upsells to a maximum of 5 options
-      upsells.length = 5;
-
-      // render available upsells
-      this.renderUpsells(submarine, upsells);
-    });
   }
 
   renderUpsells(submarine, upsells) {

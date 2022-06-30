@@ -11,7 +11,7 @@ export const UpsellForm = ({ submarine, upsell, selectedVariant, setSelectedVari
   const [added, setAdded] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  const payNowPrice = selectedVariant.price * parseInt(quantity);
+  const payNowPrice = selectedVariant.upsellPrice * parseInt(quantity);
 
   if(added) {
     return (
