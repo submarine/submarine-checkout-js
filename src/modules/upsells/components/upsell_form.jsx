@@ -2,7 +2,6 @@ import { useContext, useState } from "preact/compat";
 import classNames from "classnames";
 import { SubmarineContext } from "../../common/contexts";
 import { formatAmount } from "../../../lib/helpers";
-import { Fragment } from "preact";
 
 export const UpsellForm = ({ submarine, upsell, exchangeRate, selectedVariant, setSelectedVariantIndex }) => {
   const submarineContext = useContext(SubmarineContext);
@@ -32,13 +31,13 @@ export const UpsellForm = ({ submarine, upsell, exchangeRate, selectedVariant, s
         return;
       }
 
-      // replace the sidebar and payment information at the bottom of the page
+      // replace the sidebar, update dropdown, and payment information at the bottom of the page
       fetch(window.location.href)
         .then(response => response.text())
         .then(html => {
           const parsedDocument = new DOMParser().parseFromString(html, 'text/html');
 
-          ['[data-order-summary]', '.step__sections .section:last-child .section__content .content-box:last-child'].forEach(selector => {
+          ['[data-order-summary]', '[data-banner="true"]', '.step__sections .section:last-child .section__content .content-box:last-child'].forEach(selector => {
             const sourceElement = parsedDocument.querySelector(selector);
             const targetElement = document.querySelector(selector);
 
