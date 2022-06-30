@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import CreditCardNumberTooltip from "../common/credit_card_number_tooltip";
 import CreditCardVerificationValueTooltip from "../common/credit_card_verification_value_tooltip";
 import { useContext } from "preact/compat";
@@ -6,13 +7,25 @@ import { Fragment } from "preact";
 import ErrorMessage from "../common/error_message";
 import { t } from "../../../../../lib/helpers";
 
-const BraintreeCreditCardForm = ({ validationErrors }) => {
+const BraintreeCreditCardForm = ({ validationErrors, loading }) => {
   const submarineContext = useContext(SubmarineContext);
 
   // convert any validation errors to a translated list of messages
   const errors = validationErrors.map(validationError => {
     return t(`payment_methods.braintree.credit-card.errors.${validationError.name}.${validationError.error}`, submarineContext.translations);
   });
+
+  // input class names change as elements render
+  const inputClassName = classNames({
+    'field__input': true,
+    'field__input--iframe-container': loading
+  });
+
+  // the name element is not managed by Braintree, so we
+  let nameElement = <div id="braintree-credit-card-name" className="field__input field__input--iframe-container" />;
+  if(!loading) {
+    nameElement = <input type="text" placeholder="Name on card" className="field__input" />;
+  }
 
   return (
     <Fragment>
@@ -22,7 +35,7 @@ const BraintreeCreditCardForm = ({ validationErrors }) => {
             <label className="field__label field__label--visible" htmlFor="checkout_credit_card_number">
               {t('payment_methods.braintree.credit-card.number', submarineContext.translations)}
             </label>
-            <div id="braintree-credit-card-card-number" className="field__input" />
+            <div id="braintree-credit-card-card-number" className={inputClassName} />
             <CreditCardNumberTooltip />
           </div>
         </div>
@@ -32,7 +45,7 @@ const BraintreeCreditCardForm = ({ validationErrors }) => {
             <label className="field__label field__label--visible" htmlFor="checkout_credit_card_name">
               {t('payment_methods.braintree.credit-card.name', submarineContext.translations)}
             </label>
-            <input type="text" placeholder="Name on card" className="field__input" />
+            {nameElement}
           </div>
         </div>
 
@@ -41,7 +54,7 @@ const BraintreeCreditCardForm = ({ validationErrors }) => {
             <label className="field__label field__label--visible" htmlFor="checkout_credit_card_expiry">
               {t('payment_methods.braintree.credit-card.expiry', submarineContext.translations)}
             </label>
-            <div id="braintree-credit-card-expiration-date" className="field__input" />
+            <div id="braintree-credit-card-expiration-date" className={inputClassName} />
           </div>
         </div>
 
@@ -50,7 +63,7 @@ const BraintreeCreditCardForm = ({ validationErrors }) => {
             <label className="field__label field__label--visible" htmlFor="checkout_credit_card_verification_value">
               {t('payment_methods.braintree.credit-card.cvv', submarineContext.translations)}
             </label>
-            <div id="braintree-credit-card-cvv" className="field__input" />
+            <div id="braintree-credit-card-cvv" className={inputClassName} />
             <CreditCardVerificationValueTooltip />
           </div>
         </div>
