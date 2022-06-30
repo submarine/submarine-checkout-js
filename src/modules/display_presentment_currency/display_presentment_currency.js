@@ -6,6 +6,7 @@ import Module from "../module";
 import {
   ATTRIBUTE_PRESENTMENT_CURRENCY,
   ATTRIBUTE_PRESENTMENT_TOTAL_PRICE,
+  ATTRIBUTE_PRESENTMENT_TOTAL_PRICE_LEGACY,
   STEP_ORDER_STATUS,
   STEP_THANK_YOU
 } from "../../lib/constants";
@@ -58,7 +59,7 @@ export default class DisplayPresentmentCurrency extends Module {
     }
 
     // extract the presentment amount
-    const presentmentTotalPrice = parseInt(getOrderAttribute(submarineContext, ATTRIBUTE_PRESENTMENT_TOTAL_PRICE));
+    const presentmentTotalPrice = parseInt(getOrderAttribute(submarineContext, ATTRIBUTE_PRESENTMENT_TOTAL_PRICE_LEGACY) || getOrderAttribute(submarineContext, ATTRIBUTE_PRESENTMENT_TOTAL_PRICE));
 
     // calculate the exchange rate
     const exchangeRate = presentmentTotalPrice / shopTotalPrice;
