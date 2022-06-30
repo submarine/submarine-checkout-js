@@ -2,7 +2,7 @@ import { useContext, useState } from "preact/compat";
 import classNames from "classnames";
 import { SubmarineContext } from "../../common/contexts";
 import { formatAmount } from "../../../lib/helpers";
-import {Fragment} from "preact";
+import { Fragment } from "preact";
 
 export const UpsellForm = ({ submarine, upsell, exchangeRate, selectedVariant, setSelectedVariantIndex }) => {
   const submarineContext = useContext(SubmarineContext);
@@ -26,14 +26,30 @@ export const UpsellForm = ({ submarine, upsell, exchangeRate, selectedVariant, s
       quantity: quantity,
       notify_customer: false
     }, (result, errors) => {
-      setLoading(false);
-
       if (errors) {
+        setLoading(false);
         setErrors(errors);
         return;
       }
 
-      setAdded(true);
+      // replace the sidebar and payment information at the bottom of the page
+      fetch(window.location.href)
+        .then(response => response.text())
+        .then(html => {
+          const parsedDocument = new DOMParser().parseFromString(html, 'text/html');
+
+          ['[data-order-summary]', '.step__sections .section:last-child .section__content .content-box:last-child'].forEach(selector => {
+            const sourceElement = parsedDocument.querySelector(selector);
+            const targetElement = document.querySelector(selector);
+
+            targetElement.replaceWith(sourceElement);
+          });
+
+          document.dispatchEvent(new Event('page:change'));
+
+          setLoading(false);
+          setAdded(true);
+        });
     });
   };
 
