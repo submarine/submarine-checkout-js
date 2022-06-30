@@ -2,7 +2,7 @@ import { PaymentOption } from "./payment_option";
 import { useContext } from "preact/compat";
 import { SubmarineConfig, SubmarineContext } from "../../common/contexts";
 import { Fragment } from "preact";
-import { ATTRIBUTE_PRESENTMENT_AMOUNT, ATTRIBUTE_PRESENTMENT_CURRENCY } from "../../../lib/constants";
+import { ATTRIBUTE_PRESENTMENT_AMOUNT, ATTRIBUTE_PRESENTMENT_CURRENCY, ATTRIBUTE_PRESENTMENT_TOTAL_PRICE } from "../../../lib/constants";
 
 export const PaymentOptions = ({ submarine, paymentMethods, selectedPaymentMethod, validationErrors, setSelectedPaymentMethod }) => {
   const submarineConfig = useContext(SubmarineConfig);
