@@ -6,6 +6,7 @@ import Module from "../module";
 import {
   ATTRIBUTE_PRESENTMENT_AMOUNT,
   ATTRIBUTE_PRESENTMENT_CURRENCY,
+  ATTRIBUTE_PRESENTMENT_TOTAL_PRICE,
   STEP_ORDER_STATUS,
   STEP_THANK_YOU
 } from "../../lib/constants";
@@ -49,7 +50,7 @@ export default class DisplayPresentmentCurrency extends Module {
     const { document, submarineContext } = this.options;
 
     const shopCurrency = submarineContext.shop.currency;
-    const shopAmount = submarineContext.order.totalPrice;
+    const shopTotalPrice = submarineContext.order.totalPrice;
     const presentmentCurrency = getOrderAttribute(submarineContext, ATTRIBUTE_PRESENTMENT_CURRENCY);
 
     // bail if there's no presentment currency that differs from the base currency
@@ -58,11 +59,10 @@ export default class DisplayPresentmentCurrency extends Module {
     }
 
     // extract the presentment amount
-    const presentmentAmountFormatted = getOrderAttribute(submarineContext, ATTRIBUTE_PRESENTMENT_AMOUNT);
-    const presentmentAmount = parseFormattedAmount(presentmentAmountFormatted);
+    const presentmentTotalPrice = parseInt(getOrderAttribute(submarineContext, ATTRIBUTE_PRESENTMENT_TOTAL_PRICE));
 
     // calculate the exchange rate
-    const exchangeRate = presentmentAmount / shopAmount;
+    const exchangeRate = presentmentTotalPrice / shopTotalPrice;
 
     // convert elements that display the currency
     CURRENCY_ELEMENT_SELECTORS.forEach(selector => this.convertCurrencyElements(document, selector, presentmentCurrency));
