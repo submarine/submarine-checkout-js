@@ -2,7 +2,7 @@ import { useState } from "preact/compat";
 import { UpsellForm } from "./upsell_form";
 import { formatAmount } from "../../../lib/helpers";
 
-export const Upsell = ({ submarine, upsell }) => {
+export const Upsell = ({ submarine, upsell, exchangeRate }) => {
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const selectedVariant = upsell.variants[selectedVariantIndex];
 
@@ -18,11 +18,11 @@ export const Upsell = ({ submarine, upsell }) => {
         <h4>{upsell.title}</h4>
         {selectedVariant.upsellDiscount > 0 &&
           <p>
-            <del>{formatAmount(selectedVariant.price)}</del> <span>{selectedVariant.upsellDiscount}% off</span>
+            <del>{formatAmount(selectedVariant.price * exchangeRate)}</del> <span>{selectedVariant.upsellDiscount}% off</span>
           </p>
         }
         <p>
-          <strong>{formatAmount(selectedVariant.upsellPrice)}</strong>
+          <strong>{formatAmount(selectedVariant.upsellPrice * exchangeRate)}</strong>
         </p>
       </div>
 
@@ -30,6 +30,7 @@ export const Upsell = ({ submarine, upsell }) => {
         <UpsellForm
           submarine={submarine}
           upsell={upsell}
+          exchangeRate={exchangeRate}
           selectedVariant={selectedVariant}
           setSelectedVariantIndex={setSelectedVariantIndex}
         />

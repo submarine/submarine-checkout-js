@@ -10,7 +10,12 @@ import {
   STEP_ORDER_STATUS,
   STEP_THANK_YOU
 } from "../../lib/constants";
-import { parseFormattedAmount, formatAmount, formatReductionAmount } from "../../lib/helpers";
+import {
+  formatAmount,
+  formatReductionAmount,
+  getOrderAttribute,
+  parseFormattedAmount
+} from "../../lib/helpers";
 
 // a list of css selectors that target DOM elements that display the order currency
 const CURRENCY_ELEMENT_SELECTORS = [
@@ -32,15 +37,6 @@ const PRICE_ELEMENT_SELECTORS = [
 const REDUCTION_PRICE_ELEMENT_SELECTORS = [
   '.reduction-code .reduction-code__text'
 ];
-
-// helper method to retrieve a specific order attribute
-const getOrderAttribute = (submarineContext, attributeName) => {
-  if(!submarineContext.order || !submarineContext.order.attributes || !submarineContext.order.attributes[attributeName]) {
-    return null;
-  }
-
-  return submarineContext.order.attributes[attributeName];
-};
 
 export default class DisplayPresentmentCurrency extends Module {
 
