@@ -37,8 +37,8 @@ export default class Upsells extends Module {
     const { submarineContext } = this.options;
     const productIds = submarineContext.order.productIds;
 
-    // start by fetching a list of upsellable products
-    fetch('/collections/all?filter.v.m.submarine.permit_upsell=true&view=upsells')
+    // start by fetching a list of upsellable products in the base currency
+    fetch(`/collections/all?filter.v.m.submarine.permit_upsell=true&view=upsells&currency=${submarineContext.shop.currency}`)
       .then(response => response.json())
       .then(upsellableProducts => {
         // remove products that already exist in the order

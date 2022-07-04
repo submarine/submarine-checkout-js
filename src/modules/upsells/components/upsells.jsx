@@ -21,6 +21,7 @@ export const Upsells = ({ submarine, upsells }) => {
   const shopTotalPrice = submarineContext.order.totalPrice;
   const presentmentTotalPrice = parseInt(getOrderAttribute(submarineContext, ATTRIBUTE_PRESENTMENT_TOTAL_PRICE_LEGACY) || getOrderAttribute(submarineContext, ATTRIBUTE_PRESENTMENT_TOTAL_PRICE));
   const exchangeRate = presentmentTotalPrice / shopTotalPrice;
+  const taxRate = (submarineContext.order.taxLines || []).reduce((sum, taxLine) => sum + taxLine.rate, 0);
 
   const className = classNames({
     'notice notice-info default-background': true,
@@ -54,6 +55,7 @@ export const Upsells = ({ submarine, upsells }) => {
                       submarine={submarine}
                       upsell={upsell}
                       exchangeRate={exchangeRate}
+                      taxRate={taxRate}
                     />
                   )
                 })}

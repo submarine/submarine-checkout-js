@@ -1,9 +1,9 @@
 import { useContext, useState } from "preact/compat";
 import classNames from "classnames";
 import { SubmarineContext } from "../../common/contexts";
-import { formatAmount } from "../../../lib/helpers";
+import { calculatePrice, formatAmount } from "../../../lib/helpers";
 
-export const UpsellForm = ({ submarine, upsell, exchangeRate, selectedVariant, setSelectedVariantIndex }) => {
+export const UpsellForm = ({ submarine, upsell, exchangeRate, taxRate, selectedVariant, setSelectedVariantIndex }) => {
   const submarineContext = useContext(SubmarineContext);
 
   const [quantity, setQuantity] = useState(1);
@@ -11,7 +11,7 @@ export const UpsellForm = ({ submarine, upsell, exchangeRate, selectedVariant, s
   const [added, setAdded] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  const payNowPrice = selectedVariant.upsellPrice * parseInt(quantity);
+  const payNowPrice = calculatePrice(selectedVariant.upsellPrice, taxRate, selectedVariant.taxable, exchangeRate) * parseInt(quantity);
 
   if(added) {
     return 'Added';
@@ -64,7 +64,7 @@ export const UpsellForm = ({ submarine, upsell, exchangeRate, selectedVariant, s
   return (
     <button onClick={() => createUpsell()} className={className}>
       <span className="btn__content">
-        Pay now - {formatAmount(payNowPrice * exchangeRate)}
+        Pay now - {formatAmount(payNowPrice )}
       </span>
       <svg className="icon-svg icon-svg--size-18 btn__spinner icon-svg--spinner-button" aria-hidden="true" focusable="false">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10c0 5.523-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0v2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8h2z"/></svg>
