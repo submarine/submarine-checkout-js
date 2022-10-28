@@ -51,6 +51,8 @@ export const ICON_MASTERCARD = 'master';
 export const ICON_PAYPAL = 'paypal';
 export const ICON_VISA = 'visa';
 
+export const SELECTOR_CHECKOUT_LOADING_ELEMENTS = '[data-poll-refresh]';
+
 export const STEP_ORDER_STATUS = 'order_status';
 export const STEP_PAYMENT_METHOD = 'payment_method';
 export const STEP_THANK_YOU = 'thank_you';

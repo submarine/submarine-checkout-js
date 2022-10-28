@@ -3,6 +3,8 @@
 import { Submarine } from 'submarine-js';
 import loadScripts from '@lemuria/load-scripts'
 
+import { SELECTOR_CHECKOUT_LOADING_ELEMENTS } from "./lib/constants";
+
 import { initialisePaymentMethod } from "./lib/payment_methods/initialise";
 
 import CheckoutAttributes from "./modules/checkout_attributes/checkout_attributes";
@@ -13,11 +15,14 @@ import Upsells from "./modules/upsells/upsells";
 export class SubmarineCheckout {
 
   constructor(options) {
-    const { submarineConfig, submarineContext } = options;
+    const { document, submarineConfig, submarineContext } = options;
 
+    this.document = document;
     this.submarine = new Submarine(submarineConfig);
     this.paymentMethods = this.buildPaymentMethods(submarineConfig, submarineContext);
     this.modules = this.buildModules(options);
+
+    this.initialised = false;
 
     this.preload();
   }
@@ -51,6 +56,15 @@ export class SubmarineCheckout {
   }
 
   initialise() {
+    if(this.initialised) {
+      return;
+    }
+
+    if(this.checkoutIsLoading()) {
+      this.awaitCheckoutLoad();
+      return;
+    }
+
     this.modules.forEach(module => {
       if(!module.isActive()) {
         return;
@@ -61,6 +75,18 @@ export class SubmarineCheckout {
         paymentMethods: this.paymentMethods
       });
     });
+
+    this.initialised = true;
+  }
+
+  checkoutIsLoading() {
+    const { document } = this;
+    return !!document.querySelector(SELECTOR_CHECKOUT_LOADING_ELEMENTS);
+  }
+
+  awaitCheckoutLoad() {
+    const { document } = this;
+    document.addEventListener('page:change', this.initialise.bind(this));
   }
 
 }
