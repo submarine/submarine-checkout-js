@@ -1,5 +1,6 @@
 import DefaultFormWrapper from "./default/default_form";
 import BraintreeCreditCardFormWrapper from "./braintree/braintree_credit_card_form_wrapper";
+import BraintreePaypalFormWrapper from "./braintree/braintree_paypal_form_wrapper";
 
 import DefaultForm from "./default/default_form";
 import BraintreeCreditCardForm from "./braintree/braintree_credit_card_form";
@@ -9,7 +10,8 @@ import StripeCreditCardForm from "./stripe/stripe_credit_card_form";
 // a mapping between processors and payment method types to content wrapper components
 const PAYMENT_METHOD_FORM_WRAPPERS = {
   "braintree": {
-    "credit-card": BraintreeCreditCardFormWrapper
+    "credit-card": BraintreeCreditCardFormWrapper,
+    "paypal": BraintreePaypalFormWrapper
   }
 };
 

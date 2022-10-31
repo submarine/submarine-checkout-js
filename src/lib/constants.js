@@ -40,7 +40,13 @@ export const DEFAULT_TRANSLATIONS = {
         }
       },
       "paypal": {
-        "title": "PayPal"
+        "title": "PayPal",
+        "billingAgreementDescription": "Ongoing payment",
+        "errors": {
+          "agreement": {
+            "missing": "Please approve payment via the yellow PayPal button before completing your checkout."
+          }
+        }
       }
     }
   }
