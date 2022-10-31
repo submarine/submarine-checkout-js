@@ -11,9 +11,9 @@ export default class BraintreePayPal extends PaymentMethod {
 
   scripts() {
     return [
-      'https://js.braintreegateway.com/web/3.63.0/js/client.min.js',
-      'https://js.braintreegateway.com/web/3.63.0/js/paypal-checkout.min.js',
-      'https://js.braintreegateway.com/web/3.63.0/js/data-collector.min.js'
+      'https://js.braintreegateway.com/web/3.69.0/js/client.min.js',
+      'https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js',
+      'https://js.braintreegateway.com/web/3.69.0/js/data-collector.min.js'
     ];
   }
 

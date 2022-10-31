@@ -50,9 +50,9 @@ export default class BraintreeCreditCard extends PaymentMethod {
 
   scripts() {
     return [
-      'https://js.braintreegateway.com/web/3.63.0/js/hosted-fields.min.js',
-      'https://js.braintreegateway.com/web/3.63.0/js/client.min.js',
-      'https://js.braintreegateway.com/web/3.63.0/js/data-collector.min.js'
+      'https://js.braintreegateway.com/web/3.69.0/js/hosted-fields.min.js',
+      'https://js.braintreegateway.com/web/3.69.0/js/client.min.js',
+      'https://js.braintreegateway.com/web/3.69.0/js/data-collector.min.js'
     ];
   }
 
