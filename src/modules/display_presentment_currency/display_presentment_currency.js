@@ -99,6 +99,12 @@ export default class DisplayPresentmentCurrency extends Module {
     document.querySelectorAll(selector).forEach(element => {
       const shopAmount = parseFormattedAmount(element.innerText);
       const presentmentAmount = shopAmount * exchangeRate;
+
+      // skip if the parsed shop amount is NaN - indicates a zero amount that doesn't need conversion
+      if(isNaN(shopAmount)) {
+        return;
+      }
+
       this.updateElement(element, formatAmount(presentmentAmount));
     });
   }
