@@ -64,3 +64,4 @@ export const STEP_PAYMENT_METHOD = 'payment_method';
 export const STEP_THANK_YOU = 'thank_you';
 
 export const UPSELL_AGE_LIMIT_IN_SECONDS = 3000;
+export const UPSELL_RENDER_DELAY_IN_MILLISECONDS = 1000;

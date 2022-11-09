@@ -4,7 +4,7 @@
 import Module from "../module";
 import { render } from "preact";
 import { UpsellsContainer } from "./components/upsells_container";
-import { STEP_ORDER_STATUS, STEP_THANK_YOU, UPSELL_AGE_LIMIT_IN_SECONDS } from "../../lib/constants";
+import { STEP_ORDER_STATUS, STEP_THANK_YOU, UPSELL_AGE_LIMIT_IN_SECONDS, UPSELL_RENDER_DELAY_IN_MILLISECONDS } from "../../lib/constants";
 
 export default class Upsells extends Module {
 
@@ -106,28 +106,30 @@ export default class Upsells extends Module {
   renderUpsells(submarine, upsells) {
     const { document, submarineConfig, submarineContext } = this.options;
 
-    // find the first section element
-    const sectionsElement = document.querySelector("[data-step] .step__sections");
-    const firstSectionElement = document.querySelector("[data-step] .step__sections .section");
-    const secondSectionElement = firstSectionElement.nextSibling;
+    setTimeout(() => {
+      // find the first section element
+      const sectionsElement = document.querySelector("[data-step] .step__sections");
+      const firstSectionElement = document.querySelector("[data-step] .step__sections .section");
+      const secondSectionElement = firstSectionElement.nextSibling;
 
-    // create a container node to render into
-    const containerElement = document.createElement("div");
-    containerElement.classList.add('section');
+      // create a container node to render into
+      const containerElement = document.createElement("div");
+      containerElement.classList.add('section');
 
-    // insert the container node into the content element
-    sectionsElement.insertBefore(containerElement, secondSectionElement);
+      // insert the container node into the content element
+      sectionsElement.insertBefore(containerElement, secondSectionElement);
 
-    // render the upsells component into the page
-    render(
-      <UpsellsContainer
-        submarine={submarine}
-        submarineConfig={submarineConfig}
-        submarineContext={submarineContext}
-        upsells={upsells}
-      />,
-      containerElement
-    );
+      // render the upsells component into the page
+      render(
+        <UpsellsContainer
+          submarine={submarine}
+          submarineConfig={submarineConfig}
+          submarineContext={submarineContext}
+          upsells={upsells}
+        />,
+        containerElement
+      );
+    }, UPSELL_RENDER_DELAY_IN_MILLISECONDS);
   }
 
 }
