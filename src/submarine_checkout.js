@@ -9,6 +9,7 @@ import { initialisePaymentMethod } from "./lib/payment_methods/initialise";
 
 import CheckoutAttributes from "./modules/checkout_attributes/checkout_attributes";
 import DisplayPresentmentCurrency from "./modules/display_presentment_currency/display_presentment_currency";
+import OrderConfirmation from "./modules/order_confirmation/order_confirmation";
 import Payments from "./modules/payments/payments";
 import Upsells from "./modules/upsells/upsells";
 
@@ -37,6 +38,7 @@ export class SubmarineCheckout {
     return [
       new CheckoutAttributes(options),
       new DisplayPresentmentCurrency(options),
+      new OrderConfirmation(options),
       new Payments(options),
       new Upsells(options)
     ];
