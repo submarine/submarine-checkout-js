@@ -671,10 +671,10 @@ source-map-js@^1.0.2:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
 
-submarine-js@^0.4.0-beta.2:
-  version "0.4.0-beta.2"
-  resolved "https://registry.yarnpkg.com/submarine-js/-/submarine-js-0.4.0-beta.2.tgz#8ee4b6e673f912267b40729cc180c207fda914a5"
-  integrity sha512-LBieANrIkZ+bpcgcG/HPQHvnwQ01kqTP1Mjrv/UpiOHdkW21jdxnP7gDeMw31BQkFF1Qc8JNpltvtnIh6v2azg==
+submarine-js@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/submarine-js/-/submarine-js-0.5.5.tgz#79d6c2b3243d99893f17e72980e7780e36ce1707"
+  integrity sha512-BG4v2rykMWheq83afH5eFau01MKpR6uNc//fYM7FNiWGYmX9G5TYBRLPoa7NzReJs2PEQfZRLXXBnyR89aalXA==
   dependencies:
     json-api-models "^0.1.0-beta.7"
 

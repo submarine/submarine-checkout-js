@@ -75,7 +75,7 @@ export default class DisplayPresentmentCurrency extends Module {
     });
   }
 
-  // perform converstion
+  // perform conversion
   convertAll(document, presentmentCurrency, exchangeRate) {
     // convert elements that display the currency
     CURRENCY_ELEMENT_SELECTORS.forEach(selector => this.convertCurrencyElements(document, selector, presentmentCurrency));

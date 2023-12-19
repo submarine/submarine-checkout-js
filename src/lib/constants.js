@@ -24,7 +24,7 @@ export const DEFAULT_TRANSLATIONS = {
       "credit-card": {
         "title": "Credit Card",
         "number": "Card number",
-        "name": "Card number",
+        "name": "Name on card",
         "expiry": "Expiration date (MM \/ YY)",
         "cvv": "Security code",
         "errors": {

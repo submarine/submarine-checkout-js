@@ -26,6 +26,11 @@ export default class Payments extends Module {
       return;
     }
 
+    // bail if the gateway element has already been initialised
+    if(submarineGatewayElement.dataset.submarineInitialised) {
+      return;
+    }
+
     // find the submarine subform
     const paymentSubformElement = document.querySelector('[data-payment-subform="required"]');
     const paymentSubformContentElement = paymentSubformElement.querySelector('.content-box');
@@ -47,6 +52,28 @@ export default class Payments extends Module {
       paymentSubformElement,
       paymentSubformContentElement
     );
+
+    // flag the gateway element as being initialised
+    submarineGatewayElement.dataset.submarineInitialised = true;
+
+    // register a page change handler
+    this.registerPageChangeHandler({ submarine, paymentMethods });
+  }
+
+  registerPageChangeHandler({ submarine, paymentMethods }) {
+    const { pageChangeHandlerRegistered } = this;
+
+    if(pageChangeHandlerRegistered) {
+      return;
+    }
+
+    const { document } = this.options;
+
+    document.addEventListener('page:change', () => {
+      this.initialise({ submarine, paymentMethods });
+    });
+
+    this.pageChangeHandlerRegistered = true;
   }
 
 }
