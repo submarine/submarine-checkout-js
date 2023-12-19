@@ -27,7 +27,7 @@ const BraintreeCreditCardForm = ({ validationErrors, loading, setAdditionalData 
     nameElement = (
       <input
         type="text"
-        placeholder="Name on card"
+        placeholder={t('payment_methods.braintree.credit-card.name', submarineContext.translations)}
         className="field__input"
         onChange={e => setAdditionalData({ cardholderName: e.target.value })}
       />
